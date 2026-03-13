@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reel Beautiful | ISR & Chandani — Elite Media Production & Aesthetic Excellence</title>
+    <meta name="description" content="Founded by global power couple Inder Singh Randhawa (ISR) and Chandani. Operating at the elite intersection of high-stakes media and high-end aesthetics.">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Typography: Cormorant Garamond for display, Outfit for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Crimson+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Anybody:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Color System - Luxury Editorial */
+            --gold: #C6A75E;
+            --rose-gold: #B76E79;
+            --deep-black: #0A0A0A;
+            --charcoal: #1A1A1A;
+            --warm-white: #FAF8F5;
+            --cream: #F5F1EB;
+            --silver: #C0C0C0;
+            --accent: #8B6F47;
+            
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-editorial: 'Crimson Pro', serif;
+            --font-body: 'Anybody', sans-serif;
+            
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+            --space-2xl: 8rem;
+            
+            /* Animation */
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--warm-white);
+            color: var(--deep-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Typography System */
+        .display {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        .editorial {
+            font-family: var(--font-editorial);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(198, 167, 94, 0.1);
+            transition: all 0.3s var(--ease-smooth);
+        }
+        
+        nav.scrolled {
+            background: rgba(250, 248, 245, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--deep-black);
+            text-decoration: none;
+            transition: color 0.3s var(--ease-smooth);
+        }
+        
+        .logo:hover {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--deep-black);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-smooth);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s var(--ease-smooth);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--deep-black);
+            transition: all 0.3s var(--ease-smooth);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--warm-white) 0%, var(--cream) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(198, 167, 94, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content {
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-smooth) 0.3s forwards;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--deep-black);
+        }
+        
+        .hero-title .accent {
+            color: var(--gold);
+            font-style: italic;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            gap: 1.5rem;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--deep-black);
+            color: var(--warm-white);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s var(--ease-smooth);
+            z-index: -1;
+        }
+        
+        .btn-primary:hover::before {
+            left: 0;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--deep-black);
+            border: 2px solid var(--deep-black);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--deep-black);
+            color: var(--warm-white);
+        }
+        
+        .hero-image {
+            position: relative;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-smooth) 0.6s forwards;
+        }
+        
+        .hero-image-wrapper {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(198, 167, 94, 0.2);
+        }
+        
+        .hero-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 10, 0.3));
+            pointer-events: none;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 0.6s var(--ease-smooth);
+        }
+        
+        .hero-image-wrapper:hover img {
+            transform: scale(1);
+        }
+        
+        /* About Section */
+        .about {
+            padding: var(--space-2xl) 2rem;
+            background: var(--deep-black);
+            color: var(--warm-white);
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-smooth) forwards;
+        }
+        
+        .about-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 3rem;
+            max-width: 900px;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-smooth) 0.2s forwards;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-smooth) 0.4s forwards;
+        }
+        
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: rgba(250, 248, 245, 0.85);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-highlight {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: var(--space-2xl) 2rem;
+            background: var(--warm-white);
+        }
+        
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .service-category {
+            background: var(--cream);
+            padding: 3rem;
+            border-radius: 2px;
+            transition: all 0.4s var(--ease-smooth);
+            border: 1px solid rgba(198, 167, 94, 0.1);
+        }
+        
+        .service-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--gold);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-category h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--deep-black);
+        }
+        
+        .service-category p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-list li {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .service-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: var(--space-2xl) 2rem;
+            background: var(--charcoal);
+            color: var(--warm-white);
+        }
+        
+        .portfolio-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-smooth);
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(0deg, rgba(10, 10, 10, 0.9), transparent);
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-smooth);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-overlay h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 0.9rem;
+            color: rgba(250, 248, 245, 0.7);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: var(--space-2xl) 2rem;
+            background: var(--warm-white);
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--ease-smooth);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: var(--space-2xl) 2rem;
+            background: linear-gradient(135deg, var(--deep-black) 0%, var(--charcoal) 100%);
+            color: var(--warm-white);
+            text-align: center;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(250, 248, 245, 0.7);
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-link {
+            font-family: var(--font-editorial);
+            font-size: 1.3rem;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-smooth);
+            display: inline-block;
+        }
+        
+        .contact-link:hover {
+            color: var(--warm-white);
+            transform: translateX(10px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-link {
+            font-size: 1.5rem;
+            color: var(--warm-white);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-smooth);
+        }
+        
+        .social-link:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem;
+            background: var(--deep-black);
+            color: rgba(250, 248, 245, 0.5);
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(198, 167, 94, 0.2);
+        }
+        
+        .footer-credit {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(198, 167, 94, 0.15);
+        }
+        
+        .footer-credit a {
+            font-family: var(--font-body);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-smooth);
+            font-size: 0.85rem;
+        }
+        
+        .footer-credit a:hover {
+            color: var(--warm-white);
+            letter-spacing: 0.15em;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-smooth);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--warm-white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.4s var(--ease-smooth);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                z-index: 1000;
+            }
+            
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(7px, 7px);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 640px) {
+            :root {
+                --space-lg: 3rem;
+                --space-xl: 4rem;
+                --space-2xl: 5rem;
+            }
+            
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.875rem 2rem;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .service-category {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        /* Performance: Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">REEL BEAUTIFUL</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title display">
+                    The Elite Intersection of 
+                    <span class="accent">Media & Aesthetics</span>
+                </h1>
+                <p class="hero-subtitle editorial">
+                    Founded by global power couple Inder Singh Randhawa (ISR) & Chandani
+                </p>
+                <p class="hero-description">
+                    A transformation engine operating at the convergence of high-stakes media production and high-end aesthetic excellence. From Grammy red carpets to #1 hits, from precision beauty to cultural legacy.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Partner With Us</a>
+                    <a href="#about" class="btn btn-secondary">Our Story</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <!-- Placeholder for Grammy photo - replace with actual image -->
+                    <img src="hero_grammys.jpg" alt="ISR and Chandani at the Grammys" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="section-label">Who We Are</div>
+            <h2 class="about-title display">
+                Not just a production house—a transformation engine
+            </h2>
+            <div class="about-content">
+                <div class="about-text editorial">
+                    <p>
+                        Reel Beautiful isn't just a production house—it's a <span class="about-highlight">transformation engine</span>. Founded by global power couple Inder Singh Randhawa (ISR) and Chandani, we operate at the elite intersection of high-stakes media and high-end aesthetics.
+                    </p>
+                    <p>
+                        Our founders have navigated the world's most prestigious stages, from the Grammy red carpet to #1 hits. The resume includes major labels like <span class="about-highlight">T-Series, Sony Music, Universal Music, Zee Music Co and Viacom18</span>.
+                    </p>
+                </div>
+                <div class="about-text editorial">
+                    <p>
+                        From films including National Award winning actor Rajkummar Rao, iconic Bo Derek to having a project like "Pind De Gerhe"—also known as "Kali Activa"—which is a cultural staple.
+                    </p>
+                    <p>
+                        Now, we are institutionalizing that "star treatment," offering a <span class="about-highlight">360-degree ecosystem</span> designed to amplify both your craft and your image.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-label">What We Do</div>
+            <h2 class="about-title display">Dual Excellence</h2>
+            
+            <div class="services-grid">
+                <!-- Music Production Services -->
+                <div class="service-category">
+                    <div class="service-icon">🎬</div>
+                    <h3>The Reel World: Content with Impact</h3>
+                    <p>We don't just record; we engineer legacies. Our production arm is built for those who refuse to blend in.</p>
+                    <ul class="service-list">
+                        <li>Architectural Direction: Full-scale music and video production from concept to color grade</li>
+                        <li>Creative Strategy: High-level vision mapping to ensure your brand cut through the noise</li>
+                        <li>Lyrical Precision: Professional songwriting and composition</li>
+                        <li>The Global Push: Strategic label pitching and international promotion</li>
+                    </ul>
+                </div>
+
+                <!-- Beauty & Aesthetics Services -->
+                <div class="service-category">
+                    <div class="service-icon">✨</div>
+                    <h3>Aesthetic Excellence: Your Signature Look</h3>
+                    <p>In a visual-first world, your image is your currency. We provide the clinical and creative roadmap to your best self.</p>
+                    <ul class="service-list">
+                        <li>Strategic Consultations: In-depth analysis of your unique aesthetic profile</li>
+                        <li>The Blueprint: Tailored treatment planning for long-term beauty management</li>
+                        <li>Elite Medical Artistry: Access to premier medical aesthetic treatments via our exclusive partner network</li>
+                        <li>Red-Carpet Ready: Precision-led beauty goals designed for the spotlight</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="work">
+        <div class="portfolio-container">
+            <div class="section-label">Our Work</div>
+            <h2 class="about-title display">From Vision to Legacy</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=500&fit=crop&q=80" alt="Music Production" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Chart-Topping Hits</h3>
+                        <p>Productions that dominated airwaves globally</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800&h=500&fit=crop&q=80" alt="Film Production" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Award-Winning Films</h3>
+                        <p>Collaborations with National Award winners</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&h=500&fit=crop&q=80" alt="Aesthetic Excellence" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Beauty Transformations</h3>
+                        <p>Precision aesthetic excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-container">
+            <div class="section-label">Interview Gallery</div>
+            <h2 class="about-title display">Behind the Scenes</h2>
+            
+            <div class="gallery-grid">
+                <!-- Placeholder images - replace with actual interview gallery images -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=600&fit=crop&q=80" alt="Interview 1" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=600&fit=crop&q=80" alt="Interview 2" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=600&fit=crop&q=80" alt="Interview 3" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop&q=80" alt="Interview 4" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80" alt="Interview 5" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=600&fit=crop&q=80" alt="Interview 6" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title display">Let's Create Something Extraordinary</h2>
+            <p class="contact-subtitle editorial">
+                Ready to elevate your craft and image? Partner with us to unlock your full potential.
+            </p>
+            <div class="btn btn-primary" style="display: inline-block; margin-top: 2rem;">Start Your Transformation</div>
+            
+            <div class="contact-info">
+                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">reelbeautiful.official@gmail.com</a>
+                <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">@reelbeautiful.official</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="social-link" aria-label="Instagram">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Reel Beautiful. Founded by Inder Singh Randhawa & Chandani. All rights reserved.</p>
+        <div class="footer-credit">
+            <a href="https://snrgweb.com" target="_blank" rel="noopener">Built by SNRG WEB</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Navbar scroll effect
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.service-category, .portfolio-item, .gallery-item');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('reveal', 'active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Performance: Lazy load images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.src;
+            });
+        } else {
+            // Fallback for browsers that don't support lazy loading
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>

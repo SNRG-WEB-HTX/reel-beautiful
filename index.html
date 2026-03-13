@@ -335,21 +335,26 @@
                 padding: 6rem 1.5rem 3rem;
                 min-height: auto;
             }
-            .hero-image { order: -1; }
+            /* Content first — image second (default flow, no order flip) */
+            .hero-image { order: 1; }
+            /* Full image, no crop, no height cap */
             .hero-image-wrapper {
-                aspect-ratio: 3/2;
-                max-height: 240px;
+                aspect-ratio: auto;
+                max-height: none;
+                width: 100%;
             }
-            .hero-image img { object-position: center 18%; }
+            .hero-image img {
+                position: static;
+                width: 100%;
+                height: auto;
+                object-fit: unset;
+                transform: none;
+            }
             .hero-title { font-size: clamp(2rem, 7vw, 3rem); }
         }
 
         @media (max-width: 480px) {
             .hero-container { max-width: 100%; }
-            .hero-image-wrapper {
-                aspect-ratio: 4/3;
-                max-height: 200px;
-            }
         }
 
                 /* About Section */
@@ -1255,7 +1260,7 @@
                 max-width: 380px;
             }
 
-            /* Hero image — full width, perfectly centered crop */
+            /* Hero image — full width centered below content */
             .hero-image {
                 width: 100%;
                 display: flex;
@@ -1263,11 +1268,8 @@
             }
             .hero-image-wrapper {
                 width: 100%;
-                max-width: 420px;
+                max-width: 480px;
                 margin: 0 auto;
-            }
-            .hero-image img {
-                object-position: center 15% !important;
             }
 
             /* Raise nav on mobile */
@@ -1285,11 +1287,6 @@
             .hero-subtitle {
                 font-size: clamp(0.92rem, 4.2vw, 1.05rem) !important;
                 max-width: 100%;
-            }
-            .hero-image-wrapper {
-                max-width: 100%;
-                aspect-ratio: 4/3 !important;
-                max-height: 210px;
             }
         }
     </style>

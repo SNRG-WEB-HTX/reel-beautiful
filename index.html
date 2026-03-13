@@ -22,7 +22,7 @@
         
         :root {
             /* Color System - Luxury Editorial */
-            --gold: #8A6820;
+            --gold: #D4A853;
             --rose-gold: #B76E79;
             --deep-black: #0A0A0A;
             --charcoal: #1A1A1A;
@@ -212,26 +212,32 @@
         .hero-title .accent {
             color: var(--gold);
             font-style: italic;
+            white-space: nowrap;
+            display: inline-block;
         }
         
         .hero-subtitle {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-size: clamp(0.85rem, 2.2vw, 1.4rem);
             margin-bottom: 2rem;
             color: var(--charcoal);
-            line-height: 1.6;
+            line-height: 1.5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        
-        .hero-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--accent);
-            margin-bottom: 3rem;
-            max-width: 600px;
+
+        @media (max-width: 480px) {
+            .hero-subtitle {
+                font-size: 0.82rem;
+                white-space: normal;
+                letter-spacing: -0.01em;
+            }
         }
         
         .hero-cta {
             display: inline-flex;
             gap: 1.5rem;
+            margin-top: 0.5rem;
         }
         
         .btn {
@@ -1064,9 +1070,6 @@
                 <p class="hero-subtitle editorial">
                     Founded by global power couple Inder Singh Randhawa (ISR) & Chandani
                 </p>
-                <p class="hero-description">
-                    A transformation engine operating at the convergence of high-stakes entertainment production and high-end aesthetic excellence. From Grammy red carpets to #1 hits, from precision beauty to cultural legacy.
-                </p>
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">Partner With Us</a>
                     <a href="#about" class="btn btn-secondary">Our Story</a>
@@ -1154,24 +1157,24 @@
             
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=500&fit=crop&q=80" alt="Music Production" loading="lazy">
+                    <img src="images/image3.webp" alt="Chandani" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3>Chart-Topping Hits</h3>
-                        <p>Productions that dominated airwaves globally</p>
+                        <h3>Aesthetic Excellence</h3>
+                        <p>Precision beauty meets cultural artistry</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800&h=500&fit=crop&q=80" alt="Film Production" loading="lazy">
+                    <img src="images/IMG_9467.JPEG" alt="O Maahi Remix — Dunki" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3>Award-Winning Films</h3>
-                        <p>Collaborations with National Award winners</p>
+                        <h3>O Maahi Remix</h3>
+                        <p>By Sandeep Sulhan & ISR — Dunki</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&h=500&fit=crop&q=80" alt="Aesthetic Excellence" loading="lazy">
+                    <img src="images/IMG_3228.webp" alt="ISR — City of Houston Recognition" loading="lazy">
                     <div class="portfolio-overlay">
-                        <h3>Beauty Transformations</h3>
-                        <p>Precision aesthetic excellence</p>
+                        <h3>City of Houston</h3>
+                        <p>Recognition for cultural excellence</p>
                     </div>
                 </div>
             </div>
@@ -1427,12 +1430,12 @@
                     (832) 518-7650
                 </a>
                 <!-- Email — plain text, no CF obfuscation -->
-                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#92e0f7f7fef0f7f3e7e6fbf4e7febcfdf4f4fbf1fbf3fed2f5fff3fbfebcf1fdff" class="contact-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"/>
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
-                    reelbeautiful.official@gmail.com
+                    <span class="__cf_email__" data-cfemail="6a180f0f06080f0b1f1e030c1f0644050c0c0309030b062a0d070b030644090507">[email&#160;protected]</span>
                 </a>
                 <!-- Instagram -->
                 <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">
@@ -1456,7 +1459,7 @@
     </footer>
 
     <!-- JavaScript -->
-    <script data-cfasync="false">
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false">
         document.addEventListener('DOMContentLoaded', function () {
 
         // ── Mobile Menu Toggle ──────────────────────────────────────────
@@ -1540,15 +1543,4 @@
         document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
             anchor.addEventListener('click', function (e) {
                 var href = this.getAttribute('href');
-                var target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        }); // end DOMContentLoaded
-    </script>
-</body>
-</html>
+                var target = document.querySelector(hre

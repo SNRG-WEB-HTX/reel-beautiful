@@ -490,16 +490,11 @@
         
         .portfolio-item {
             position: relative;
-            aspect-ratio: 4/5;
             overflow: hidden;
             border-radius: 2px;
             cursor: pointer;
-            transition: transform 0.4s var(--ease-smooth);
-            background: var(--charcoal);
-        }
-        
-        .portfolio-item:hover {
-            transform: scale(1.02);
+            background: #111;
+            height: 420px;
         }
         
         .portfolio-item img {
@@ -509,13 +504,18 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center center;
             display: block;
-            transition: transform 0.6s var(--ease-smooth);
+            transition: transform 0.5s var(--ease-smooth);
+        }
+
+        .portfolio-item.contain-img img {
+            object-fit: contain;
+            padding: 1rem;
         }
         
         .portfolio-item:hover img {
-            transform: scale(1.06);
+            transform: scale(1.03);
         }
         
         .portfolio-overlay {
@@ -524,7 +524,7 @@
             left: 0;
             right: 0;
             padding: 1.75rem;
-            background: linear-gradient(0deg, rgba(10, 10, 10, 0.92) 0%, transparent 100%);
+            background: linear-gradient(0deg, rgba(10,10,10,0.92) 0%, transparent 100%);
             transform: translateY(100%);
             transition: transform 0.4s var(--ease-smooth);
             z-index: 2;
@@ -543,27 +543,17 @@
         
         .portfolio-overlay p {
             font-size: 0.85rem;
-            color: rgba(250, 248, 245, 0.72);
+            color: rgba(250, 248, 245, 0.75);
         }
 
         @media (max-width: 900px) {
-            .portfolio-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1rem;
-            }
+            .portfolio-item { height: 320px; }
         }
 
         @media (max-width: 600px) {
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 1.25rem;
-            }
-            .portfolio-item {
-                aspect-ratio: 3/2;
-            }
-            .portfolio-item img {
-                object-position: center center;
-            }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .portfolio-item { height: 280px; }
+            .portfolio-item.contain-img img { padding: 0.5rem; }
         }
         
         /* Gallery Section */
@@ -1185,7 +1175,7 @@
             <h2 class="about-title display">From Vision to Legacy</h2>
             
             <div class="portfolio-grid">
-                <!-- Card 1: Lady in red dress -->
+                <!-- Card 1: Lady in red dress - portrait, cover works great -->
                 <div class="portfolio-item">
                     <img src="images/image3.webp" alt="Chandani — Aesthetic Excellence" loading="lazy">
                     <div class="portfolio-overlay">
@@ -1193,9 +1183,9 @@
                         <p>Precision beauty meets cultural artistry</p>
                     </div>
                 </div>
-                <!-- Card 2: Tum Par Hum Hai / Atke Yaara 2.0 -->
-                <div class="portfolio-item">
-                    <img src="images/IMG_2151.JPG" alt="Tum Par Hum Hai — Atke Yaara 2.0" loading="lazy" style="object-position: center center;">
+                <!-- Card 2: Square album cover - contain so full artwork shows -->
+                <div class="portfolio-item contain-img">
+                    <img src="images/tumfarhumhai.webp" alt="Tum Par Hum Hai — Atke Yaara 2.0" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Tum Par Hum Hai</h3>
                         <p>Atke Yaara 2.0 — ISR Production</p>
@@ -1203,7 +1193,7 @@
                 </div>
                 <!-- Card 3: Houston Mayor recognition -->
                 <div class="portfolio-item">
-                    <img src="images/IMG_3228.webp" alt="ISR — City of Houston Recognition" loading="lazy" style="object-position: center 20%;">
+                    <img src="images/IMG_3228.webp" alt="ISR — City of Houston Recognition" loading="lazy" style="object-position: center 15%;">
                     <div class="portfolio-overlay">
                         <h3>City of Houston</h3>
                         <p>Recognition for cultural excellence</p>
@@ -1462,12 +1452,12 @@
                     (832) 518-7650
                 </a>
                 <!-- Email — plain text, no CF obfuscation -->
-                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#1e6c7b7b727c7b7f6b6a77786b7230717878777d777f725e79737f7772307d7173" class="contact-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"/>
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
-                    reelbeautiful.official@gmail.com
+                    <span class="__cf_email__" data-cfemail="364453535a54535743425f50435a185950505f555f575a76515b575f5a1855595b">[email&#160;protected]</span>
                 </a>
                 <!-- Instagram -->
                 <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">
@@ -1490,22 +1480,19 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script data-cfasync="false">
-        document.addEventListener('DOMContentLoaded', function () {
-
-        // ── Mobile Menu Toggle ──────────────────────────────────────────
+    <!-- JavaScript: placed at end of body so DOM is always ready, no DOMContentLoaded needed -->
+    <script>
+        // ── Mobile Menu Toggle ──────────────────────────────────
         var menuToggle = document.getElementById('menuToggle');
         var navLinks   = document.getElementById('navLinks');
 
         if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', function () {
+                var isOpen = navLinks.classList.contains('active');
                 menuToggle.classList.toggle('active');
                 navLinks.classList.toggle('active');
-                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                document.body.style.overflow = isOpen ? '' : 'hidden';
             });
-
             document.querySelectorAll('.nav-links a').forEach(function (link) {
                 link.addEventListener('click', function () {
                     menuToggle.classList.remove('active');
@@ -1515,19 +1502,15 @@
             });
         }
 
-        // ── Navbar scroll effect ────────────────────────────────────────
+        // ── Navbar scroll ───────────────────────────────────────
         var nav = document.getElementById('nav');
         if (nav) {
             window.addEventListener('scroll', function () {
-                if (window.pageYOffset > 100) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
+                nav.classList[window.pageYOffset > 100 ? 'add' : 'remove']('scrolled');
             });
         }
 
-        // ── Scroll Reveal via IntersectionObserver ──────────────────────
+        // ── Scroll Reveal (IntersectionObserver) ───────────────
         var revealTargets = document.querySelectorAll('.service-category, .portfolio-item, .gallery-item');
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
@@ -1537,43 +1520,44 @@
                         io.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.08 });
             revealTargets.forEach(function (el) { io.observe(el); });
         } else {
             revealTargets.forEach(function (el) { el.classList.add('reveal', 'active'); });
         }
 
-        // ── Accordion — Interviews ──────────────────────────────────────
+        // ── Interview Accordion ─────────────────────────────────
         document.querySelectorAll('.iv-trigger').forEach(function (trigger) {
             var item = trigger.closest('.iv-item');
             if (!item) return;
-
             function toggle() {
                 var isOpen = item.classList.contains('open');
-                // Close all open items
                 document.querySelectorAll('.iv-item.open').forEach(function (openItem) {
                     openItem.classList.remove('open');
                     var t = openItem.querySelector('.iv-trigger');
                     if (t) t.setAttribute('aria-expanded', 'false');
                 });
-                // Open this one if it was closed
                 if (!isOpen) {
                     item.classList.add('open');
                     trigger.setAttribute('aria-expanded', 'true');
                 }
             }
-
             trigger.addEventListener('click', toggle);
             trigger.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggle();
-                }
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
             });
         });
 
-        // ── Smooth scroll ───────────────────────────────────────────────
+        // ── Smooth Scroll ───────────────────────────────────────
         document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
             anchor.addEventListener('click', function (e) {
-                var href = this.getAttribute('href');
-                var target = document.querySelector(hre
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

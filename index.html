@@ -323,12 +323,20 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1.05);
+            object-position: center top;
+            transform: scale(1.02);
             transition: transform 0.6s var(--ease-smooth);
         }
         
         .hero-image-wrapper:hover img {
             transform: scale(1);
+        }
+
+        @media (max-width: 968px) {
+            .hero-image img {
+                object-position: center 15%;
+                transform: scale(1);
+            }
         }
         
         /* About Section */
@@ -557,40 +565,149 @@
         }
         
         /* Gallery Section */
+        /* ── Gallery Carousel ─────────────────────────────────── */
         .gallery {
-            padding: var(--space-2xl) 2rem;
-            background: var(--warm-white);
+            padding: var(--space-2xl) 0 var(--space-xl);
+            background: var(--deep-black);
+            overflow: hidden;
         }
-        
+
         .gallery-container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 4rem;
-        }
-        
-        .gallery-item {
+
+        .gallery .section-label { color: var(--gold); }
+        .gallery .about-title   { color: var(--warm-white); margin-bottom: 3rem; }
+
+        .carousel {
             position: relative;
-            aspect-ratio: 1;
+        }
+
+        .carousel-track-wrap {
+            overflow: hidden;
+            border-radius: 3px;
+            cursor: grab;
+        }
+
+        .carousel-track-wrap:active { cursor: grabbing; }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .carousel-track.dragging {
+            transition: none;
+        }
+
+        .carousel-slide {
+            flex: 0 0 33.333%;
+            padding: 0 0.6rem;
+            box-sizing: border-box;
+        }
+
+        .carousel-slide-inner {
+            position: relative;
+            aspect-ratio: 4/5;
             overflow: hidden;
             border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: #111;
         }
-        
-        .gallery-item img {
+
+        .carousel-slide-inner img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center top;
+            display: block;
             transition: transform 0.5s var(--ease-smooth);
+            pointer-events: none;
         }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
+
+        .carousel-slide:hover .carousel-slide-inner img {
+            transform: scale(1.04);
+        }
+
+        /* Prev / Next */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(250,248,245,0.2);
+            background: rgba(10,10,10,0.7);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            color: var(--warm-white);
+        }
+
+        .carousel-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--deep-black);
+        }
+
+        .carousel-btn svg {
+            width: 18px; height: 18px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+            display: block;
+        }
+
+        .carousel-btn-prev { left: -23px; }
+        .carousel-btn-next { right: -23px; }
+
+        /* Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .carousel-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: rgba(250,248,245,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none; padding: 0;
+            flex-shrink: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--gold);
+            transform: scale(1.4);
+        }
+
+        /* Tablet: 2 slides */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .carousel-slide { flex: 0 0 50%; }
+        }
+
+        /* Mobile: 1 slide, full width */
+        @media (max-width: 600px) {
+            .gallery { padding: var(--space-xl) 0; }
+            .gallery-container { padding: 0 1rem; }
+            .carousel-slide { flex: 0 0 100%; padding: 0; }
+            .carousel-slide-inner { aspect-ratio: 4/5; }
+            .carousel-btn-prev { left: 6px; }
+            .carousel-btn-next { right: 6px; }
+            .carousel-btn { width: 38px; height: 38px; }
         }
         
         /* Interview Section - Reel People, Real Talk */
@@ -1410,27 +1527,38 @@
         <div class="gallery-container">
             <div class="section-label">Interview Gallery</div>
             <h2 class="about-title display">Behind the Scenes</h2>
-            
-            <div class="gallery-grid">
-                <!-- Placeholder images - replace with actual interview gallery images -->
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=600&fit=crop&q=80" alt="Interview 1" loading="lazy">
+
+            <div class="carousel" id="gallery-carousel">
+                <button class="carousel-btn carousel-btn-prev" aria-label="Previous" onclick="carouselMove(-1)">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+
+                <div class="carousel-track-wrap" id="carouselWrap">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_6926.webp" alt="ISR with Jelly Roll" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image9.webp" alt="ISR & Chandani with Udit Narayan" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image7.webp" alt="Chandani" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image2.webp" alt="Nonito Donaire" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image6.webp" alt="Chandani with Kumar Sanu" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2753.webp" alt="Chandani at the Grammys" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image8.webp" alt="Reel Beautiful" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2871.webp" alt="Chandani — Reel Beautiful" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image1.webp" alt="Tris Dhaliwal" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_1971.webp" alt="ISR & Chandani Grammy Red Carpet" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2008.webp" alt="ISR at the Grammys" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2034.webp" alt="ISR & Chandani at the Grammys" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_4041.webp" alt="ISR & Chandani — MusiCares" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image4.webp" alt="Chandani" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image5.webp" alt="Reel Beautiful" loading="lazy"></div></div>
+                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image10.webp" alt="Reel Beautiful" loading="lazy"></div></div>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=600&fit=crop&q=80" alt="Interview 2" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=600&fit=crop&q=80" alt="Interview 3" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=600&fit=crop&q=80" alt="Interview 4" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80" alt="Interview 5" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=600&fit=crop&q=80" alt="Interview 6" loading="lazy">
-                </div>
+
+                <button class="carousel-btn carousel-btn-next" aria-label="Next" onclick="carouselMove(1)">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
         </div>
     </section>
@@ -1480,7 +1608,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript: placed at end of body so DOM is always ready, no DOMContentLoaded needed -->
+    <!-- JavaScript: at end of body — DOM guaranteed ready, no DOMContentLoaded needed -->
     <script>
         // ── Mobile Menu Toggle ──────────────────────────────────
         var menuToggle = document.getElementById('menuToggle');
@@ -1510,8 +1638,8 @@
             });
         }
 
-        // ── Scroll Reveal (IntersectionObserver) ───────────────
-        var revealTargets = document.querySelectorAll('.service-category, .portfolio-item, .gallery-item');
+        // ── Scroll Reveal ───────────────────────────────────────
+        var revealTargets = document.querySelectorAll('.service-category, .portfolio-item');
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
@@ -1558,6 +1686,108 @@
                 }
             });
         });
+
+        // ── Gallery Carousel ────────────────────────────────────
+        (function () {
+            var track     = document.getElementById('carouselTrack');
+            var wrap      = document.getElementById('carouselWrap');
+            var dotsWrap  = document.getElementById('carouselDots');
+            if (!track || !wrap || !dotsWrap) return;
+
+            var slides    = track.querySelectorAll('.carousel-slide');
+            var total     = slides.length;
+            var current   = 0;
+
+            // How many slides visible at once based on viewport
+            function visCount() {
+                var w = window.innerWidth;
+                if (w <= 600)  return 1;
+                if (w <= 1024) return 2;
+                return 3;
+            }
+
+            // Max index we can go to
+            function maxIdx() { return total - visCount(); }
+
+            // Build dots (one per "page")
+            function buildDots() {
+                dotsWrap.innerHTML = '';
+                var pages = Math.ceil(total / visCount());
+                for (var i = 0; i < pages; i++) {
+                    var d = document.createElement('button');
+                    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    d.dataset.page = i;
+                    dotsWrap.appendChild(d);
+                }
+                dotsWrap.addEventListener('click', function (e) {
+                    var btn = e.target.closest('.carousel-dot');
+                    if (!btn) return;
+                    goTo(parseInt(btn.dataset.page) * visCount());
+                });
+            }
+
+            function goTo(idx) {
+                current = Math.max(0, Math.min(idx, maxIdx()));
+                var pct = -(current * (100 / visCount()));
+                track.style.transform = 'translateX(' + pct + '%)';
+                // Update dots
+                var activePage = Math.floor(current / visCount());
+                dotsWrap.querySelectorAll('.carousel-dot').forEach(function (d, i) {
+                    d.classList.toggle('active', i === activePage);
+                });
+            }
+
+            // Global move function used by inline onclick buttons
+            window.carouselMove = function (dir) {
+                goTo(current + dir * visCount());
+            };
+
+            buildDots();
+            window.addEventListener('resize', function () { buildDots(); goTo(current); });
+
+            // Touch / drag support
+            var startX = 0, isDragging = false, dragDelta = 0;
+
+            wrap.addEventListener('touchstart', function (e) {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            }, { passive: true });
+
+            wrap.addEventListener('touchmove', function (e) {
+                if (!isDragging) return;
+                dragDelta = e.touches[0].clientX - startX;
+            }, { passive: true });
+
+            wrap.addEventListener('touchend', function () {
+                if (!isDragging) return;
+                isDragging = false;
+                if (Math.abs(dragDelta) > 50) {
+                    window.carouselMove(dragDelta < 0 ? 1 : -1);
+                }
+                dragDelta = 0;
+            });
+
+            // Mouse drag
+            wrap.addEventListener('mousedown', function (e) {
+                startX = e.clientX;
+                isDragging = true;
+                track.classList.add('dragging');
+            });
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                dragDelta = e.clientX - startX;
+            });
+            document.addEventListener('mouseup', function () {
+                if (!isDragging) return;
+                isDragging = false;
+                track.classList.remove('dragging');
+                if (Math.abs(dragDelta) > 60) {
+                    window.carouselMove(dragDelta < 0 ? 1 : -1);
+                }
+                dragDelta = 0;
+            });
+        })();
     </script>
 </body>
 </html>

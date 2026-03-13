@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Disable Cloudflare email obfuscation for this page -->
+    <meta name="cf-2fa-verify" content="no">
+    <meta http-equiv="x-cf-settings" content="email_obfuscation=off">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reel Beautiful | ISR & Chandani — Elite Entertainment Production & Aesthetic Excellence</title>
     <meta name="description" content="Founded by global power couple Inder Singh Randhawa (ISR) and Chandani. Operating at the elite intersection of high-stakes entertainment and high-end aesthetics.">
@@ -623,14 +626,20 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center 20%;
             display: block;
-            transition: transform 0.5s var(--ease-smooth);
+            /* Force native resolution — no browser upscale blur */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
             pointer-events: none;
+            transition: transform 0.4s var(--ease-smooth);
         }
 
         .carousel-slide:hover .carousel-slide-inner img {
-            transform: scale(1.04);
+            transform: translateZ(0) scale(1.02);
         }
 
         /* Prev / Next */
@@ -1294,7 +1303,7 @@
             <div class="portfolio-grid">
                 <!-- Card 1: Lady in red dress - portrait, cover works great -->
                 <div class="portfolio-item">
-                    <img src="images/image3.webp" alt="Chandani — Aesthetic Excellence" loading="lazy">
+                    <img src="images/image3.webp" alt="Chandani — Aesthetic Excellence" loading="lazy" style="object-position: center 5%;">
                     <div class="portfolio-overlay">
                         <h3>Aesthetic Excellence</h3>
                         <p>Precision beauty meets cultural artistry</p>
@@ -1580,12 +1589,15 @@
                     (832) 518-7650
                 </a>
                 <!-- Email — plain text, no CF obfuscation -->
-                <a href="/cdn-cgi/l/email-protection#1e6c7b7b727c7b7f6b6a77786b7230717878777d777f725e79737f7772307d7173" class="contact-link">
+                <!-- CF email obfuscation disabled via Cloudflare Dashboard:
+                     Security > Settings > Email Address Obfuscation = OFF
+                     OR: Page Rules > yoursite.com/* > Email Obfuscation = Off -->
+                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"/>
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
-                    <span class="__cf_email__" data-cfemail="364453535a54535743425f50435a185950505f555f575a76515b575f5a1855595b">[email&#160;protected]</span>
+                    reelbeautiful.official@gmail.com
                 </a>
                 <!-- Instagram -->
                 <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">

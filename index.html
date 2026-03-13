@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reel Beautiful | ISR & Chandani — Elite Media Production & Aesthetic Excellence</title>
-    <meta name="description" content="Founded by global power couple Inder Singh Randhawa (ISR) and Chandani. Operating at the elite intersection of high-stakes media and high-end aesthetics.">
+    <title>Reel Beautiful | ISR & Chandani — Elite Entertainment Production & Aesthetic Excellence</title>
+    <meta name="description" content="Founded by global power couple Inder Singh Randhawa (ISR) and Chandani. Operating at the elite intersection of high-stakes entertainment and high-end aesthetics.">
     
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
         
         :root {
             /* Color System - Luxury Editorial */
-            --gold: #C6A75E;
+            --gold: #8A6820;
             --rose-gold: #B76E79;
             --deep-black: #0A0A0A;
             --charcoal: #1A1A1A;
@@ -564,101 +564,299 @@
             transform: scale(1.05);
         }
         
+        /* Interview Section - Reel People, Real Talk */
+        .interviews {
+            padding: var(--space-2xl) 2rem;
+            background: var(--warm-white);
+        }
+        
+        .interviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .interview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        
+        /* ── Interviews: Editorial Accordion ── */
+        .interviews {
+            padding: var(--space-2xl) 0;
+            background: var(--deep-black);
+            color: var(--warm-white);
+        }
+
+        .interviews-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .interviews .section-label {
+            color: var(--gold);
+        }
+
+        .interviews .about-title {
+            color: var(--warm-white);
+            margin-bottom: 4rem;
+        }
+
+        /* Accordion list */
+        .interview-list {
+            border-top: 1px solid rgba(250, 248, 245, 0.12);
+        }
+
+        /* Each person row */
+        .iv-item {
+            border-bottom: 1px solid rgba(250, 248, 245, 0.12);
+            overflow: hidden;
+        }
+
+        /* Clickable trigger row */
+        .iv-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+
+        .iv-trigger:hover { opacity: 0.75; }
+
+        .iv-trigger-left {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .iv-number {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            flex-shrink: 0;
+            width: 2rem;
+        }
+
+        .iv-name {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--warm-white);
+            letter-spacing: -0.01em;
+            transition: color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .iv-item.open .iv-name,
+        .iv-trigger:hover .iv-name {
+            color: var(--gold);
+        }
+
+        .iv-role {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(250, 248, 245, 0.45);
+            flex-shrink: 0;
+            margin-left: auto;
+            padding-right: 1.5rem;
+        }
+
+        /* Plus / minus icon */
+        .iv-icon {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(250, 248, 245, 0.2);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s var(--ease-smooth);
+            color: var(--warm-white);
+        }
+
+        .iv-item.open .iv-icon {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--deep-black);
+            transform: rotate(45deg);
+        }
+
+        .iv-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Collapsible body */
+        .iv-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .iv-item.open .iv-body {
+            max-height: 3000px;
+        }
+
+        .iv-body-inner {
+            padding: 0 0 3rem 3.5rem;
+        }
+
+        /* Q&A pairs */
+        .iv-qa {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 1rem 3rem;
+            padding: 1.75rem 0;
+            border-bottom: 1px solid rgba(250, 248, 245, 0.07);
+        }
+
+        .iv-qa:last-child { border-bottom: none; }
+
+        .iv-q {
+            font-family: var(--font-editorial);
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 600;
+            color: #D4A853;
+            line-height: 1.5;
+            padding-top: 0.1rem;
+        }
+
+        .iv-a {
+            font-family: var(--font-editorial);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #FAF8F5;
+        }
+
+        /* Mobile: stack Q&A vertically */
+        @media (max-width: 700px) {
+            .iv-trigger { padding: 1.5rem 0; }
+
+            .iv-name { font-size: clamp(1.5rem, 7vw, 2.2rem); white-space: normal; }
+
+            .iv-role { display: none; }
+
+            .iv-body-inner { padding: 0 0 2rem 0; }
+
+            .iv-qa {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.25rem 0;
+            }
+
+            .iv-q { font-size: 0.95rem; }
+            .iv-a { font-size: 1.05rem; }
+        }
+        
         /* Contact Section */
         .contact {
-            padding: var(--space-2xl) 2rem;
+            padding: 4rem 2rem 3rem;
             background: linear-gradient(135deg, var(--deep-black) 0%, var(--charcoal) 100%);
             color: var(--warm-white);
             text-align: center;
         }
         
         .contact-container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
         
         .contact-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 2rem;
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+            margin-bottom: 1.25rem;
         }
         
         .contact-subtitle {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.75;
             color: rgba(250, 248, 245, 0.7);
-            margin-bottom: 3rem;
+            margin-bottom: 0;
         }
         
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 3rem;
+            gap: 0.7rem;
+            margin-top: 1.5rem;
+            align-items: center;
         }
         
         .contact-link {
             font-family: var(--font-editorial);
-            font-size: 1.3rem;
-            color: var(--gold);
+            font-size: 1.15rem;
+            color: #FAF8F5;
             text-decoration: none;
             transition: all 0.3s var(--ease-smooth);
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            line-height: 1.4;
         }
         
         .contact-link:hover {
-            color: var(--warm-white);
-            transform: translateX(10px);
+            color: #D4A853;
         }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
+
+        .contact-link svg {
+            flex-shrink: 0;
+            opacity: 0.7;
         }
-        
-        .social-link {
-            font-size: 1.5rem;
-            color: var(--warm-white);
-            text-decoration: none;
-            transition: all 0.3s var(--ease-smooth);
-        }
-        
-        .social-link:hover {
-            color: var(--gold);
-            transform: translateY(-5px);
-        }
-        
+
         /* Footer */
         footer {
-            padding: 2rem;
+            padding: 1rem 2rem;
             background: var(--deep-black);
-            color: rgba(250, 248, 245, 0.5);
+            border-top: 1px solid rgba(212, 168, 83, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.35rem;
             text-align: center;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(198, 167, 94, 0.2);
         }
-        
-        .footer-credit {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(198, 167, 94, 0.15);
+
+        .footer-copy {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: rgba(250, 248, 245, 0.5);
+            letter-spacing: 0.02em;
         }
         
         .footer-credit a {
             font-family: var(--font-body);
-            font-weight: 500;
-            letter-spacing: 0.1em;
+            font-weight: 700;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--gold);
+            color: #D4A853;
             text-decoration: none;
-            transition: all 0.3s var(--ease-smooth);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
+            transition: color 0.3s var(--ease-smooth);
         }
         
         .footer-credit a:hover {
-            color: var(--warm-white);
-            letter-spacing: 0.15em;
+            color: #FAF8F5;
         }
         
         /* Animations */
@@ -693,12 +891,12 @@
                 right: -100%;
                 width: 100%;
                 height: 100vh;
-                background: var(--warm-white);
+                background: var(--deep-black);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 2rem;
-                transition: right 0.4s var(--ease-smooth);
+                gap: 2.5rem;
+                transition: right 0.55s cubic-bezier(0.76, 0, 0.24, 1);
                 z-index: 999;
             }
             
@@ -706,9 +904,51 @@
                 right: 0;
             }
             
+            .nav-links.active a {
+                font-family: var(--font-display);
+                font-size: 2.6rem;
+                font-weight: 400;
+                letter-spacing: 0.02em;
+                text-transform: none;
+                color: var(--warm-white);
+            }
+            
+            .nav-links.active a:hover {
+                color: var(--gold);
+            }
+            
+            .nav-links.active a::after {
+                background: var(--gold);
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            
+            .nav-links.active li {
+                animation: navItemIn 0.45s var(--ease-smooth) both;
+            }
+            
+            .nav-links.active li:nth-child(1) { animation-delay: 0.12s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.19s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.26s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.33s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.40s; }
+            .nav-links.active li:nth-child(6) { animation-delay: 0.47s; }
+            
+            @keyframes navItemIn {
+                from { opacity: 0; transform: translateX(30px); }
+                to   { opacity: 1; transform: translateX(0); }
+            }
+            
             .menu-toggle {
                 display: flex;
                 z-index: 1000;
+            }
+            
+            .menu-toggle.active span {
+                background: var(--warm-white);
             }
             
             .menu-toggle.active span:nth-child(1) {
@@ -737,7 +977,9 @@
             }
             
             .hero-cta {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem;
             }
             
             .about-content {
@@ -771,8 +1013,7 @@
             }
             
             .btn {
-                padding: 0.875rem 2rem;
-                width: 100%;
+                padding: 0.875rem 1.75rem;
                 text-align: center;
             }
             
@@ -800,6 +1041,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#work">Work</a></li>
+                <li><a href="#interviews">Interviews</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -817,13 +1059,13 @@
             <div class="hero-content">
                 <h1 class="hero-title display">
                     The Elite Intersection of 
-                    <span class="accent">Media & Aesthetics</span>
+                    <span class="accent">Entertainment & Aesthetics</span>
                 </h1>
                 <p class="hero-subtitle editorial">
                     Founded by global power couple Inder Singh Randhawa (ISR) & Chandani
                 </p>
                 <p class="hero-description">
-                    A transformation engine operating at the convergence of high-stakes media production and high-end aesthetic excellence. From Grammy red carpets to #1 hits, from precision beauty to cultural legacy.
+                    A transformation engine operating at the convergence of high-stakes entertainment production and high-end aesthetic excellence. From Grammy red carpets to #1 hits, from precision beauty to cultural legacy.
                 </p>
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">Partner With Us</a>
@@ -850,7 +1092,7 @@
             <div class="about-content">
                 <div class="about-text editorial">
                     <p>
-                        Reel Beautiful isn't just a production house—it's a <span class="about-highlight">transformation engine</span>. Founded by global power couple Inder Singh Randhawa (ISR) and Chandani, we operate at the elite intersection of high-stakes media and high-end aesthetics.
+                        Reel Beautiful isn't just a production house—it's a <span class="about-highlight">transformation engine</span>. Founded by global power couple Inder Singh Randhawa (ISR) and Chandani, we operate at the elite intersection of high-stakes entertainment and high-end aesthetics.
                     </p>
                     <p>
                         Our founders have navigated the world's most prestigious stages, from the Grammy red carpet to #1 hits. The resume includes major labels like <span class="about-highlight">T-Series, Sony Music, Universal Music, Zee Music Co and Viacom18</span>.
@@ -936,6 +1178,208 @@
         </div>
     </section>
 
+    <!-- Interviews Section - Reel People, Real Talk -->
+    <section class="interviews" id="interviews">
+        <div class="interviews-container">
+            <div class="section-label">Reel People, Real Talk</div>
+            <h2 class="about-title display">Conversations with Excellence</h2>
+
+            <div class="interview-list">
+
+                <!-- 01 Jyotica Tangri -->
+                <div class="iv-item" data-index="0">
+                    <div class="iv-trigger" role="button" aria-expanded="false" tabindex="0">
+                        <div class="iv-trigger-left">
+                            <span class="iv-number">01</span>
+                            <span class="iv-name">Jyotica Tangri</span>
+                        </div>
+                        <span class="iv-role">Singer</span>
+                        <div class="iv-icon">
+                            <svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                        </div>
+                    </div>
+                    <div class="iv-body">
+                        <div class="iv-body-inner">
+                            <div class="iv-qa">
+                                <p class="iv-q">When did you know you wanted to do this?</p>
+                                <p class="iv-a">My mumma used to hum songs all the time, papa used to listen to Lata ji and Mukesh ji's songs so I grew up listening to all these. I remember that in my pre school interview (I must be 2.5 years old) all I did was sing to my teacher, and I immediately got the admission. Soon my parents put me in a music school, and at the age of 6 or 7 years I started learning classical music and surprisingly I enjoyed it a lot. As I grew older I knew I wanted to do music full time.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What does beauty mean to you?</p>
+                                <p class="iv-a">Beauty to me is the distinct features, the full smile, the marks and spots, the sparkle of the eyes, everything that makes each other unique.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Any beauty secrets or go-to routine?</p>
+                                <p class="iv-a">I have noticed that whenever I am happy, I automatically look beautiful. Keeping the skin clean and healthy helps a lot, exfoliating the skin regularly is my routine.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Which project is your favorite?</p>
+                                <p class="iv-a">I have been blessed with some immensely loved songs of Bollywood, including Pallo Latke, O Meri Laila, Ishq de Fanniyar, Mungda, Gallan Kardi and 100 more songs in my career of 7 years as yet. I love doing playbacks for films, but recently I have started making my own music and it gives me another level of satisfaction — like how I wrote the lyrics of Tere Deewane, Kharaab, Duniya Zamana, and composed a song called Amma for my mother. These things are special.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What is next for you?</p>
+                                <p class="iv-a">I want to travel the world with my whole band and team and play my songs on every huge stage, in big festivals, doing tours with massive productions, creating live experiences never heard or seen before, taking JT live a notch higher.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02 Manpreet Toor -->
+                <div class="iv-item" data-index="1">
+                    <div class="iv-trigger" role="button" aria-expanded="false" tabindex="0">
+                        <div class="iv-trigger-left">
+                            <span class="iv-number">02</span>
+                            <span class="iv-name">Manpreet Toor</span>
+                        </div>
+                        <span class="iv-role">Dancer</span>
+                        <div class="iv-icon">
+                            <svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                        </div>
+                    </div>
+                    <div class="iv-body">
+                        <div class="iv-body-inner">
+                            <div class="iv-qa">
+                                <p class="iv-q">When did you know you wanted to do this?</p>
+                                <p class="iv-a">I always knew I wanted to dance, but I don't think it really hit me that I was going to do this professionally until social media came along. It really changed my view on turning this into something more professional.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What does beauty mean to you?</p>
+                                <p class="iv-a">That's an amazing question. I don't believe I've ever been asked that before. They say beauty is in the eye of the beholder — I really believe that. Beauty to me is beyond skin deep. It's what we are inside that shows the real beauty on the outside.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Any beauty secrets or go-to routine?</p>
+                                <p class="iv-a">Beauty starts from within and from your gut and it's really important to take care of that first. From your gut to your skin it's always good to have a routine as simple as washing your face with a good cleanser and moisturizing. Start young.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Which project is your favorite?</p>
+                                <p class="iv-a">I definitely cherish all my music videos because they have helped me grow in different ways. But starting from the beginning of my dance venture, I would definitely cherish all my YouTube projects I have done on my own channel.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What is next for you?</p>
+                                <p class="iv-a">There is a lot of new things coming for me. I'm definitely working on expanding my business and taking it to the next level.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 Tris Dhaliwal -->
+                <div class="iv-item" data-index="2">
+                    <div class="iv-trigger" role="button" aria-expanded="false" tabindex="0">
+                        <div class="iv-trigger-left">
+                            <span class="iv-number">03</span>
+                            <span class="iv-name">Tris Dhaliwal</span>
+                        </div>
+                        <span class="iv-role">Actor / Model</span>
+                        <div class="iv-icon">
+                            <svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                        </div>
+                    </div>
+                    <div class="iv-body">
+                        <div class="iv-body-inner">
+                            <div class="iv-qa">
+                                <p class="iv-q">When did you know you wanted to do this?</p>
+                                <p class="iv-a">I got my first big break at 17 when I was backstage during Diljit's Jatt and Juliet tour. I had friends doing the choreography for the kid's performance. I met Diljit and a week later I was shooting Proper Patola!</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What does beauty mean to you?</p>
+                                <p class="iv-a">Beauty to me means good health and happiness. When you're healthiest and happiest your outer beauty will follow. A beautiful heart always stands above a beautiful face.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Any beauty secrets or go-to routine?</p>
+                                <p class="iv-a">The best beauty tips are usually not the most expensive ones! Use sunscreen, drink lots of water, eat healthy and exercise. They're the most basic tips but they make all the difference in the world.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Which project is your favorite?</p>
+                                <p class="iv-a">Working with Diljit was a dream! We've worked together for 10 years now and he's one of the kindest, most humble people I've ever met. He deserves all of his success, truly.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What is next for you?</p>
+                                <p class="iv-a">The next step for me is unknown! As of now I'm working on finishing law school but you never know where the world will take you next!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 04 Nonito Donaire -->
+                <div class="iv-item" data-index="3">
+                    <div class="iv-trigger" role="button" aria-expanded="false" tabindex="0">
+                        <div class="iv-trigger-left">
+                            <span class="iv-number">04</span>
+                            <span class="iv-name">Nonito Donaire</span>
+                        </div>
+                        <span class="iv-role">Boxing World Champion</span>
+                        <div class="iv-icon">
+                            <svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                        </div>
+                    </div>
+                    <div class="iv-body">
+                        <div class="iv-body-inner">
+                            <div class="iv-qa">
+                                <p class="iv-q">When did you know you wanted to do this?</p>
+                                <p class="iv-a">I never really wanted to be a fighter. It was to make my father see me and be proud of me.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Does a fear of how you will look cross your mind?</p>
+                                <p class="iv-a">Being a fighter is all about the warrior mindset. The masculine energy is about imposing power, strength, fearlessness and that's where we find beauty. Appearance is created in one's actions, character, and accomplishments. Beauty is truly in the eyes of the beholder.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Any routine to heal and protect your appearance?</p>
+                                <p class="iv-a">The routine for the youthful energy is in the mind. How we perceive ourselves tends to manifest in our body. Eating healthy, working out, positive mindset, and meditation for our spirit. Taking the beauty of life and being grateful — I believe that is the key to life's youthful energy.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What's your favorite memory in the sport?</p>
+                                <p class="iv-a">In boxing the memory that comes to mind first is my first world title fight — winning and becoming world champion for the first time.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What is next for you, champ?</p>
+                                <p class="iv-a">Finding a way to help the world. I've done what is needed for me and my family through boxing. The next is having purpose beyond myself — healing our planet. I created a company partnered with a waste-to-energy system that is zero emissions, to ensure the beauty of our planet for the next generation and the generations to come.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 05 Monica Gill -->
+                <div class="iv-item" data-index="4">
+                    <div class="iv-trigger" role="button" aria-expanded="false" tabindex="0">
+                        <div class="iv-trigger-left">
+                            <span class="iv-number">05</span>
+                            <span class="iv-name">Monica Gill</span>
+                        </div>
+                        <span class="iv-role">Actress</span>
+                        <div class="iv-icon">
+                            <svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
+                        </div>
+                    </div>
+                    <div class="iv-body">
+                        <div class="iv-body-inner">
+                            <div class="iv-qa">
+                                <p class="iv-q">When did you know you wanted to do this?</p>
+                                <p class="iv-a">I think I always kind of knew in my gut. But time had to let destiny unfold in its own way and it did.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What does beauty mean to you?</p>
+                                <p class="iv-a">Beauty is how you carry yourself, how you feel and how you make those around you feel.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Any beauty secrets or go-to routine?</p>
+                                <p class="iv-a">Gratitude. Wake up and say a prayer of gratitude each morning and watch how your life changes.</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">Which project is your favorite?</p>
+                                <p class="iv-a">Ucha Dar Babe Nanak Da — which will be out this year!</p>
+                            </div>
+                            <div class="iv-qa">
+                                <p class="iv-q">What is next for Monica Gill?</p>
+                                <p class="iv-a">Wherever life takes me!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /interview-list -->
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="gallery" id="gallery">
         <div class="gallery-container">
@@ -973,18 +1417,31 @@
             <p class="contact-subtitle editorial">
                 Ready to elevate your craft and image? Partner with us to unlock your full potential.
             </p>
-            <div class="btn btn-primary" style="display: inline-block; margin-top: 2rem;">Start Your Transformation</div>
             
             <div class="contact-info">
-                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">reelbeautiful.official@gmail.com</a>
-                <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">@reelbeautiful.official</a>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="social-link" aria-label="Instagram">
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                <!-- Phone -->
+                <a href="tel:8325187650" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
+                    (832) 518-7650
+                </a>
+                <!-- Email — plain text, no CF obfuscation -->
+                <a href="mailto:reelbeautiful.official@gmail.com" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                    reelbeautiful.official@gmail.com
+                </a>
+                <!-- Instagram -->
+                <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+                    </svg>
+                    @reelbeautiful.official
                 </a>
             </div>
         </div>
@@ -992,90 +1449,106 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Reel Beautiful. Founded by Inder Singh Randhawa & Chandani. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 Reel Beautiful — Founded by Inder Singh Randhawa &amp; Chandani. All rights reserved.</p>
         <div class="footer-credit">
             <a href="https://snrgweb.com" target="_blank" rel="noopener">Built by SNRG WEB</a>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-        
-        // Close menu when link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+    <script data-cfasync="false">
+        document.addEventListener('DOMContentLoaded', function () {
+
+        // ── Mobile Menu Toggle ──────────────────────────────────────────
+        var menuToggle = document.getElementById('menuToggle');
+        var navLinks   = document.getElementById('navLinks');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function () {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
             });
-        });
-        
-        // Navbar scroll effect
-        const nav = document.getElementById('nav');
-        let lastScroll = 0;
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.service-category, .portfolio-item, .gallery-item');
-        
-        const revealOnScroll = () => {
-            revealElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('reveal', 'active');
-                }
+
+            document.querySelectorAll('.nav-links a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
-        };
-        
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Initial check
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Performance: Lazy load images
-        if ('loading' in HTMLImageElement.prototype) {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-                img.src = img.src;
-            });
-        } else {
-            // Fallback for browsers that don't support lazy loading
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-            document.body.appendChild(script);
         }
+
+        // ── Navbar scroll effect ────────────────────────────────────────
+        var nav = document.getElementById('nav');
+        if (nav) {
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // ── Scroll Reveal via IntersectionObserver ──────────────────────
+        var revealTargets = document.querySelectorAll('.service-category, .portfolio-item, .gallery-item');
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal', 'active');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealTargets.forEach(function (el) { io.observe(el); });
+        } else {
+            revealTargets.forEach(function (el) { el.classList.add('reveal', 'active'); });
+        }
+
+        // ── Accordion — Interviews ──────────────────────────────────────
+        document.querySelectorAll('.iv-trigger').forEach(function (trigger) {
+            var item = trigger.closest('.iv-item');
+            if (!item) return;
+
+            function toggle() {
+                var isOpen = item.classList.contains('open');
+                // Close all open items
+                document.querySelectorAll('.iv-item.open').forEach(function (openItem) {
+                    openItem.classList.remove('open');
+                    var t = openItem.querySelector('.iv-trigger');
+                    if (t) t.setAttribute('aria-expanded', 'false');
+                });
+                // Open this one if it was closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            trigger.addEventListener('click', toggle);
+            trigger.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle();
+                }
+            });
+        });
+
+        // ── Smooth scroll ───────────────────────────────────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        }); // end DOMContentLoaded
     </script>
 </body>
 </html>

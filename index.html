@@ -1325,6 +1325,235 @@
             }
         }
         
+
+        /* ── Work Modal ─────────────────────────────────────────── */
+        .work-more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2.5rem auto 0;
+            gap: 0.6rem;
+            padding: 0.9rem 2.2rem;
+            background: transparent;
+            border: 1.5px solid rgba(250,248,245,0.25);
+            border-radius: 2px;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--warm-white);
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+        }
+        .work-more-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .work-more-btn svg {
+            width: 14px; height: 14px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2; stroke-linecap: round;
+        }
+
+        /* Work overlay */
+        #workOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,10,10,0.88);
+            backdrop-filter: blur(10px);
+            z-index: 9500;
+            overflow-y: auto;
+            padding: 2rem 1.5rem 3rem;
+        }
+        #workOverlay.active { display: block; }
+
+        .work-modal-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(212,168,83,0.2);
+        }
+
+        .work-modal-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: var(--warm-white);
+            font-weight: 400;
+        }
+
+        .work-modal-close {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(250,248,245,0.2);
+            background: transparent;
+            cursor: pointer;
+            color: var(--warm-white);
+            font-size: 1.4rem;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .work-modal-close:hover { background: var(--gold); border-color: var(--gold); color: var(--deep-black); }
+
+        /* Section labels inside modal */
+        .work-section-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+            margin-top: 2.5rem;
+        }
+        .work-section-label:first-of-type { margin-top: 0; }
+
+        /* Video grid */
+        .work-video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .work-video-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 3px;
+            cursor: pointer;
+            background: #1a1a1a;
+            border: 1px solid rgba(250,248,245,0.06);
+            transition: all 0.25s;
+        }
+        .work-video-thumb:hover { border-color: var(--gold); transform: translateY(-3px); }
+        .work-video-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s;
+        }
+        .work-video-thumb:hover img { transform: scale(1.04); }
+        .work-video-play {
+            position: absolute;
+            inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(10,10,10,0.3);
+            transition: background 0.25s;
+        }
+        .work-video-thumb:hover .work-video-play { background: rgba(10,10,10,0.5); }
+        .work-video-play-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(212,168,83,0.9);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .work-video-play-circle svg {
+            width: 14px; height: 14px;
+            fill: #0A0A0A; stroke: none;
+            margin-left: 2px;
+        }
+
+        /* Press cards */
+        .work-press-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .work-press-card {
+            background: rgba(250,248,245,0.05);
+            border: 1px solid rgba(212,168,83,0.15);
+            border-radius: 3px;
+            padding: 1.5rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.25s;
+        }
+        .work-press-card:hover { border-color: var(--gold); background: rgba(250,248,245,0.08); }
+        .work-press-source {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .work-press-headline {
+            font-family: var(--font-editorial);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--warm-white);
+            line-height: 1.4;
+        }
+        .work-press-arrow {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(250,248,245,0.4);
+            font-family: var(--font-body);
+            letter-spacing: 0.08em;
+        }
+
+        /* Video player modal */
+        #videoPlayer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        #videoPlayer.active { display: flex; }
+        .video-player-wrap {
+            width: 100%;
+            max-width: 960px;
+            position: relative;
+        }
+        .video-player-close {
+            position: absolute;
+            top: -44px; right: 0;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(250,248,245,0.3);
+            background: transparent;
+            cursor: pointer;
+            color: var(--warm-white);
+            font-size: 1.3rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .video-player-close:hover { background: var(--warm-white); color: #0A0A0A; }
+        .video-iframe-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .video-iframe-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            border: none;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 900px) {
+            .work-video-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .work-video-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+            .work-press-grid { grid-template-columns: 1fr; }
+            #workOverlay { padding: 1.25rem 1rem 2rem; }
+            .work-modal-title { font-size: 1.4rem; }
+        }
         /* Performance: Reduce motion for users who prefer it */
         @media (prefers-reduced-motion: reduce) {
             * {
@@ -1525,7 +1754,7 @@
                 </div>
                 <!-- Card 2: O Maahi Remix -->
                 <div class="portfolio-item contain-img">
-                    <img src="images/IMG_9467.JPEG" alt="O Maahi Remix — Dunki" loading="lazy">
+                    <img src="images/omaahiremix.webp" alt="O Maahi Remix — Dunki" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>O Maahi Remix</h3>
                         <p>By Sandeep Sulhan &amp; ISR — Dunki</p>
@@ -1540,6 +1769,10 @@
                     </div>
                 </div>
             </div>
+            <button class="work-more-btn" onclick="document.getElementById('workOverlay').classList.add('active');document.body.style.overflow='hidden';">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+                See All Work &amp; Press
+            </button>
         </div>
     </section>
 
@@ -2109,6 +2342,166 @@
                 document.head.appendChild(style);
             });
         }
+    </script>
+
+    <!-- Work & Press Modal -->
+    <div id="workOverlay" onclick="if(event.target===this){this.classList.remove('active');document.body.style.overflow='';}">
+        <div class="work-modal-inner">
+            <div class="work-modal-header">
+                <h2 class="work-modal-title display">From Vision to Legacy</h2>
+                <button class="work-modal-close" onclick="document.getElementById('workOverlay').classList.remove('active');document.body.style.overflow='';">&times;</button>
+            </div>
+
+            <p class="work-section-label">Music &amp; Video Productions</p>
+            <div class="work-video-grid">
+                <div class="work-video-thumb" onclick="playVideo('u2d6y1_dJU4')">
+                    <img src="https://img.youtube.com/vi/u2d6y1_dJU4/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('Kv14XF2j26c')">
+                    <img src="https://img.youtube.com/vi/Kv14XF2j26c/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('DXSDe1HF1VU')">
+                    <img src="https://img.youtube.com/vi/DXSDe1HF1VU/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('E7LG5ZgGIxM')">
+                    <img src="https://img.youtube.com/vi/E7LG5ZgGIxM/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('nEaWcaybdFY')">
+                    <img src="https://img.youtube.com/vi/nEaWcaybdFY/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('7aNTQhSKGQE')">
+                    <img src="https://img.youtube.com/vi/7aNTQhSKGQE/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('rJ5ozK6xttI')">
+                    <img src="https://img.youtube.com/vi/rJ5ozK6xttI/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('FjG0pV6Q4nY')">
+                    <img src="https://img.youtube.com/vi/FjG0pV6Q4nY/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('7a-kAxQo5tI')">
+                    <img src="https://img.youtube.com/vi/7a-kAxQo5tI/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('H-1Sdc0iudU')">
+                    <img src="https://img.youtube.com/vi/H-1Sdc0iudU/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('sRLbi5fHzVM')">
+                    <img src="https://img.youtube.com/vi/sRLbi5fHzVM/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('zovT7UF4CQc')">
+                    <img src="https://img.youtube.com/vi/zovT7UF4CQc/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('dRujARrxtY8')">
+                    <img src="https://img.youtube.com/vi/dRujARrxtY8/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('HbfPVACQhE8')">
+                    <img src="https://img.youtube.com/vi/HbfPVACQhE8/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('QUCW95brR04')">
+                    <img src="https://img.youtube.com/vi/QUCW95brR04/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('dj2uO4Mp7Kk')">
+                    <img src="https://img.youtube.com/vi/dj2uO4Mp7Kk/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('8M1wBSEkf0M')">
+                    <img src="https://img.youtube.com/vi/8M1wBSEkf0M/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('IoWFHB8oCGA')">
+                    <img src="https://img.youtube.com/vi/IoWFHB8oCGA/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('3TfYwe4c_Yo')">
+                    <img src="https://img.youtube.com/vi/3TfYwe4c_Yo/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('878lvuQzo7U')">
+                    <img src="https://img.youtube.com/vi/878lvuQzo7U/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('6LUbfKdmNGc')">
+                    <img src="https://img.youtube.com/vi/6LUbfKdmNGc/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('2Sm_3ZrkdZY')">
+                    <img src="https://img.youtube.com/vi/2Sm_3ZrkdZY/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('kuSpfb5cJK8')">
+                    <img src="https://img.youtube.com/vi/kuSpfb5cJK8/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('m6ePYRorxKY')">
+                    <img src="https://img.youtube.com/vi/m6ePYRorxKY/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="work-video-thumb" onclick="playVideo('O_aXVlfdLsA')">
+                    <img src="https://img.youtube.com/vi/O_aXVlfdLsA/mqdefault.jpg" alt="ISR Production" loading="lazy">
+                    <div class="work-video-play"><div class="work-video-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+            </div>
+
+            <p class="work-section-label" style="margin-top:2.5rem;">Press &amp; Features</p>
+            <div class="work-press-grid">
+                <a href="https://timesofindia.indiatimes.com/entertainment/the-inspiring-journey-of-us-power-couple-isr-and-chandani-in-the-music-industry/amp_articleshow/113553364.cms" target="_blank" rel="noopener" class="work-press-card">
+                    <span class="work-press-source">Times of India</span>
+                    <span class="work-press-headline">The Inspiring Journey of US Power Couple ISR &amp; Chandani in the Music Industry</span>
+                    <div class="work-press-arrow">Read Article →</div>
+                </a>
+                <a href="https://abc13.com/amp/post/visions-bridging-cultures-through-music-/2066900/" target="_blank" rel="noopener" class="work-press-card">
+                    <span class="work-press-source">ABC 13 Houston</span>
+                    <span class="work-press-headline">Visions: Bridging Cultures Through Music</span>
+                    <div class="work-press-arrow">Read Article →</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player -->
+    <div id="videoPlayer" onclick="if(event.target===this)closeVideoPlayer()">
+        <div class="video-player-wrap">
+            <button class="video-player-close" onclick="closeVideoPlayer()">&times;</button>
+            <div class="video-iframe-wrap">
+                <iframe id="videoIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function playVideo(id) {
+            var vp = document.getElementById('videoPlayer');
+            document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+            vp.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeVideoPlayer() {
+            var vp = document.getElementById('videoPlayer');
+            document.getElementById('videoIframe').src = '';
+            vp.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoPlayer();
+                document.getElementById('workOverlay').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     </script>
 </body>
 </html>

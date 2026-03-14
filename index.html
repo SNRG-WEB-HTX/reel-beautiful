@@ -1865,7 +1865,9 @@
             #workOverlay { padding: 1.25rem 1rem 2rem; }
             .work-modal-title { font-size: 1.4rem; }
         }
-        /* Performance: Reduce motion for users who prefer it */
+        @media (max-width: 640px) {
+            .projects-grid-3 { grid-template-columns: 1fr !important; }
+        }
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -2159,10 +2161,49 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section style="padding:var(--space-2xl) 2rem;background:var(--warm-white);">
+        <div style="max-width:1400px;margin:0 auto;">
+            <div class="section-label">Craft &amp; Legacy</div>
+            <h2 class="about-title display">Productions &amp; Placements</h2>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;" class="projects-grid-3">
+
+                <!-- Tum Par Hum Hai / Atke Yaara 2.0 -->
+                <div style="position:relative;overflow:hidden;border-radius:3px;background:#111;aspect-ratio:1/1;cursor:pointer;" class="portfolio-item contain-img">
+                    <img src="images/tumfarhumhai.webp" alt="Tum Par Hum Hai — Atke Yaara 2.0" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;">
+                    <div class="portfolio-overlay">
+                        <h3>Tum Par Hum Hai</h3>
+                        <p>Atke Yaara 2.0 — ISR Production · T-Series</p>
+                    </div>
+                </div>
+
+                <!-- O Maahi Remix -->
+                <div style="position:relative;overflow:hidden;border-radius:3px;background:#111;aspect-ratio:1/1;cursor:pointer;" class="portfolio-item contain-img">
+                    <img src="images/omaahiremix.webp" alt="O Maahi Remix — Dunki · ISR" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;">
+                    <div class="portfolio-overlay">
+                        <h3>O Maahi Remix</h3>
+                        <p>By Sandeep Sulhan &amp; ISR · Dunki · Rajkumar Hirani</p>
+                    </div>
+                </div>
+
+                <!-- Mool Mantra — Peacock / NBCUniversal -->
+                <div style="position:relative;overflow:hidden;border-radius:3px;background:#111;aspect-ratio:1/1;cursor:pointer;" class="portfolio-item contain-img">
+                    <img src="images/moolmantra.webp" alt="Mool Mantra — Peacock / NBCUniversal · ISR" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;">
+                    <div class="portfolio-overlay">
+                        <h3>Mool Mantra</h3>
+                        <p>Jyotica Tangri · Peacock / NBCUniversal · Courtesy ISR</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="gallery" id="gallery">
         <div class="gallery-container">
-            <div class="section-label">Interview Gallery</div>
+            <div class="section-label">Gallery</div>
             <h2 class="about-title display">Behind the Scenes</h2>
 
             <div class="carousel" id="gallery-carousel">
@@ -2183,9 +2224,6 @@
                         <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2008.webp" alt="ISR at the Grammys" loading="lazy"></div></div>
                         <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_2034.webp" alt="ISR & Chandani at the Grammys" loading="lazy"></div></div>
                         <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/IMG_4041.webp" alt="ISR & Chandani — MusiCares" loading="lazy"></div></div>
-                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image4.webp" alt="Chandani" loading="lazy"></div></div>
-                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image5.webp" alt="Reel Beautiful" loading="lazy"></div></div>
-                        <div class="carousel-slide"><div class="carousel-slide-inner"><img src="images/image10.webp" alt="Reel Beautiful" loading="lazy"></div></div>
                     </div>
                 </div>
 

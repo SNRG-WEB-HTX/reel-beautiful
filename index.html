@@ -1445,7 +1445,7 @@
 
         /* Footer */
         footer {
-            padding: 1rem 2rem;
+            padding: 1rem 2rem max(1rem, env(safe-area-inset-bottom, 0px));
             background: var(--deep-black);
             border-top: 1px solid rgba(212, 168, 83, 0.25);
             display: flex;
@@ -1458,8 +1458,12 @@
         }
 
         html, body {
-            margin-bottom: 0;
-            padding-bottom: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            overscroll-behavior-y: none;
         }
 
         body > *:last-child {
@@ -1511,6 +1515,60 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ── Contrast: section labels — gold only on dark backgrounds ── */
+        .section-label {
+            color: var(--charcoal);
+        }
+        .about .section-label,
+        .portfolio .section-label,
+        .gallery .section-label {
+            color: var(--gold);
+        }
+        .interviews .section-label {
+            color: var(--charcoal);
+        }
+
+        /* ── Contrast: service card body text — deep readable brown ── */
+        .service-category p {
+            color: #3C2E1A !important;
+            font-weight: 400;
+        }
+
+        /* ── Scroll Reveal: sr-init (fade+rise) and sr-title (dramatic scale+rise) ── */
+        .sr-init {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sr-title {
+            opacity: 0;
+            transform: translateY(52px) scale(0.97);
+            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sr-init.sr-on,
+        .sr-title.sr-on {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── Craft & Legacy: full-bleed photo cards on mobile ── */
+        @media (max-width: 640px) {
+            .craft-legacy-wrap { padding-left: 0 !important; padding-right: 0 !important; }
+            .craft-legacy-labels { padding-left: 1.25rem; padding-right: 1.25rem; }
+            .projects-grid-3 {
+                grid-template-columns: 1fr !important;
+                gap: 0.5rem !important;
+                margin-top: 1.5rem !important;
+            }
+            .projects-grid-3 .portfolio-item {
+                border-radius: 0 !important;
+                width: 100vw !important;
+                margin-left: calc(-1 * var(--section-pad, 2rem));
+            }
         }
         
         /* Mobile Responsive */
@@ -2038,11 +2096,11 @@
                         <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"/></svg>
                     </div>
                     <h3>Aesthetic Excellence: Your Signature Look</h3>
-                    <p>In a visual-first world, your image is your currency. We provide the clinical and creative roadmap to your best self.</p>
+                    <p style="margin-bottom:1rem;">With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, she brings an insider's lens to her platform, Reel Beautiful.</p>
+                    <p style="margin-bottom:1.75rem;">By deconstructing the secrets of the stars through interviews and conversations with top experts, she provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
                     <ul class="service-list">
                         <li>Strategic Consultations: In-depth analysis of your unique aesthetic profile</li>
                         <li>The Blueprint: Tailored treatment planning for long-term beauty management</li>
-                        <li>Elite Medical Artistry: Access to premier medical aesthetic treatments via our exclusive partner network</li>
                         <li>Red-Carpet Ready: Precision-led beauty goals designed for the spotlight</li>
                     </ul>
                 </div>
@@ -2304,21 +2362,83 @@
             });
         }
 
-        // ── Scroll Reveal ───────────────────────────────────────
-        var revealTargets = document.querySelectorAll('.service-category, .portfolio-item');
-        if ('IntersectionObserver' in window) {
+        // ── Scroll Reveal (Comprehensive) ───────────────────────
+        (function () {
+            if (!('IntersectionObserver' in window)) return;
+
+            // Selectors that get the dramatic TITLE entrance (scale + rise)
+            var titleSels = [
+                '.about-title',
+                '.contact-title'
+            ];
+
+            // Selectors that get the standard fade+rise
+            var revealSels = [
+                '.section-label',
+                '.service-category',
+                '.portfolio-item',
+                '.iv-item',
+                '.about-text',
+                '.about-content',
+                '.contact-subtitle',
+                '.contact-info',
+                '.contact-link',
+                '.carousel-slide',
+                '.work-press-card'
+            ];
+
+            var heroSection = document.querySelector('.hero');
+
+            function notInHero(el) {
+                return !heroSection || !heroSection.contains(el);
+            }
+
+            // Apply sr-title class to all title elements outside hero
+            titleSels.forEach(function (sel) {
+                document.querySelectorAll(sel).forEach(function (el) {
+                    if (notInHero(el)) el.classList.add('sr-title');
+                });
+            });
+
+            // Apply sr-init class to all reveal elements outside hero
+            revealSels.forEach(function (sel) {
+                document.querySelectorAll(sel).forEach(function (el) {
+                    if (notInHero(el)) el.classList.add('sr-init');
+                });
+            });
+
+            // Stagger children in grid containers
+            var gridSels = [
+                '.services-grid',
+                '.portfolio-grid',
+                '.projects-grid-3',
+                '.interview-list'
+            ];
+            gridSels.forEach(function (sel) {
+                var parent = document.querySelector(sel);
+                if (!parent) return;
+                parent.querySelectorAll('.sr-init').forEach(function (el, i) {
+                    el.dataset.delay = Math.min(i * 100, 400);
+                });
+            });
+
+            // Single IntersectionObserver for everything
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('reveal', 'active');
-                        io.unobserve(entry.target);
-                    }
+                    if (!entry.isIntersecting) return;
+                    var el = entry.target;
+                    var delay = parseInt(el.dataset.delay || '0', 10);
+                    setTimeout(function () {
+                        el.classList.add('sr-on');
+                    }, delay);
+                    io.unobserve(el);
                 });
-            }, { threshold: 0.08 });
-            revealTargets.forEach(function (el) { io.observe(el); });
-        } else {
-            revealTargets.forEach(function (el) { el.classList.add('reveal', 'active'); });
-        }
+            }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.sr-title, .sr-init').forEach(function (el) {
+                io.observe(el);
+            });
+        }());
 
         // ── Interview Modal ─────────────────────────────────────────
         var INTERVIEWS = {

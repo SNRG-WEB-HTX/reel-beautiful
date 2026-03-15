@@ -1529,57 +1529,41 @@
             transform: none;
         }
 
-        /* ── Hero image: cinematic parallax shimmer effect ── */
+        /* ── Hero image: cinematic glow + float effect ── */
+
+        /* Gold pulse glow — box-shadow works outside overflow:hidden */
         .hero-image-wrapper {
-            position: relative;
+            animation: heroGlow 4s ease-in-out infinite, heroFloat 7s ease-in-out infinite;
         }
 
-        /* Gold shimmer frame — animated border glow */
-        .hero-image-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 5px;
-            background: linear-gradient(135deg,
-                rgba(212,168,83,0.0) 0%,
-                rgba(212,168,83,0.6) 30%,
-                rgba(212,168,83,0.0) 50%,
-                rgba(212,168,83,0.5) 75%,
-                rgba(212,168,83,0.0) 100%
-            );
-            background-size: 300% 300%;
-            animation: heroShimmer 5s ease-in-out infinite;
-            z-index: 1;
-            pointer-events: none;
+        @keyframes heroGlow {
+            0%, 100% {
+                box-shadow:
+                    0 16px 48px rgba(0,0,0,0.13),
+                    0 0 0 1px rgba(212,168,83,0.15);
+            }
+            50% {
+                box-shadow:
+                    0 20px 60px rgba(0,0,0,0.18),
+                    0 0 0 2px rgba(212,168,83,0.75),
+                    0 0 50px rgba(212,168,83,0.12);
+            }
         }
 
-        /* Soft inner vignette overlay */
+        /* Soft vignette overlay — stays inside, no conflict */
         .hero-image-wrapper::after {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(180deg, transparent 55%, rgba(10,10,10,0.18) 100%),
-                radial-gradient(ellipse at center, transparent 60%, rgba(10,10,10,0.08) 100%);
+            background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.15) 100%);
             pointer-events: none;
-            z-index: 2;
+            z-index: 1;
             border-radius: 3px;
         }
 
-        /* Breathing float on the image itself */
-        .hero-image-wrapper img {
-            animation: heroFloat 7s ease-in-out infinite;
-        }
-
-        @keyframes heroShimmer {
-            0%   { background-position: 0% 0%; opacity: 0.7; }
-            50%  { background-position: 100% 100%; opacity: 1; }
-            100% { background-position: 0% 0%; opacity: 0.7; }
-        }
-
         @keyframes heroFloat {
-            0%, 100% { transform: scale(1) translateY(0px); }
-            50%       { transform: scale(1.012) translateY(-5px); }
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-8px); }
         }
 
         /* ── Scroll reveal states ── */
@@ -2435,17 +2419,13 @@
             var hero = document.querySelector('.hero');
             function outsideHero(el) { return !hero || !hero.contains(el); }
 
-            // 1. Section labels — slide from left
+            // Step 1: Add all sr classes synchronously so CSS opacity:0 is in the DOM
             document.querySelectorAll('.section-label').forEach(function (el) {
                 if (outsideHero(el)) el.classList.add('sr-label');
             });
-
-            // 2. Section titles — dramatic scale+rise
             document.querySelectorAll('.about-title, .contact-title').forEach(function (el) {
                 if (outsideHero(el)) el.classList.add('sr-title');
             });
-
-            // 3. Everything else — fade+rise with per-element stagger
             var revealEls = document.querySelectorAll(
                 '.about-text, .about-content,' +
                 '.service-category, .portfolio-item,' +
@@ -2457,7 +2437,7 @@
                 if (outsideHero(el)) el.classList.add('sr-init');
             });
 
-            // 4. Stagger grid children by index
+            // Step 2: Stagger grid children by index
             ['.services-grid', '.portfolio-grid', '.projects-grid-3', '.interview-list'].forEach(function (sel) {
                 var parent = document.querySelector(sel);
                 if (!parent) return;
@@ -2466,6 +2446,7 @@
                 });
             });
 
+            // Step 3: No IntersectionObserver support — reveal everything
             if (!('IntersectionObserver' in window)) {
                 document.querySelectorAll('.sr-label, .sr-title, .sr-init').forEach(function (el) {
                     el.classList.add('sr-on');
@@ -2473,16 +2454,24 @@
                 return;
             }
 
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('sr-on');
-                    io.unobserve(entry.target);
-                });
-            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            // Step 4: Double rAF — guarantees 2 paint cycles with opacity:0 rendered
+            // before observer starts. This is critical for GitHub Pages CDN timing.
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
 
-            document.querySelectorAll('.sr-label, .sr-title, .sr-init').forEach(function (el) {
-                io.observe(el);
+                    var io = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) return;
+                            entry.target.classList.add('sr-on');
+                            io.unobserve(entry.target);
+                        });
+                    }, { threshold: 0.01, rootMargin: '0px 0px -20px 0px' });
+
+                    document.querySelectorAll('.sr-label, .sr-title, .sr-init').forEach(function (el) {
+                        io.observe(el);
+                    });
+
+                });
             });
 
         }());

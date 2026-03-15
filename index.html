@@ -620,24 +620,15 @@
                 0 0 0 1px rgba(212, 168, 83, 0.18);
         }
 
-        .hero-image-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 55%, rgba(10, 10, 10, 0.22));
-            pointer-events: none;
-        }
-
         .hero-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center top;
             display: block;
-            transition: transform 0.6s var(--ease-smooth);
         }
 
-        .hero-image-wrapper:hover img { transform: scale(1.02); }
+        .hero-image-wrapper:hover img { filter: brightness(1.04); }
 
         @media (max-width: 968px) {
             .hero-container {
@@ -701,25 +692,19 @@
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease-smooth) forwards;
+            margin-bottom: 0.6rem;
         }
         
         .about-title {
             font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
             max-width: 900px;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease-smooth) 0.2s forwards;
         }
         
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--ease-smooth) 0.4s forwards;
         }
         
         .about-text {
@@ -752,7 +737,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2.5rem;
-            margin-top: 3.5rem;
+            margin-top: 1.75rem;
         }
         
         .service-category {
@@ -873,7 +858,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-top: 4rem;
+            margin-top: 1.75rem;
         }
         
         .portfolio-item {
@@ -959,7 +944,7 @@
         }
 
         .gallery .section-label { color: var(--gold); }
-        .gallery .about-title   { color: var(--warm-white); margin-bottom: 3rem; }
+        .gallery .about-title   { color: var(--warm-white); margin-bottom: 1.5rem; }
 
         .carousel {
             position: relative;
@@ -1005,15 +990,13 @@
             object-fit: contain;
             object-position: center center;
             display: block;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transform: translateZ(0);
+            image-rendering: -webkit-optimize-contrast;
             pointer-events: none;
-            transition: transform 0.4s var(--ease-smooth);
+            transition: transform 0.5s var(--ease-smooth);
         }
 
         .carousel-slide:hover .carousel-slide-inner img {
-            transform: translateZ(0) scale(1.02);
+            transform: scale(1.02);
         }
 
         /* Prev / Next */
@@ -1106,7 +1089,7 @@
         }
 
         .interviews .section-label { color: var(--gold); }
-        .interviews .about-title   { color: var(--deep-black); margin-bottom: 3.5rem; }
+        .interviews .about-title   { color: var(--deep-black); margin-bottom: 1.5rem; }
 
         /* Card grid — matches Our Work layout */
         .interview-list {
@@ -1537,23 +1520,108 @@
         }
 
         /* ── Scroll Reveal: sr-init (fade+rise) and sr-title (dramatic scale+rise) ── */
+
+        /* Global image sharpness — no GPU subpixel blur */
+        img {
+            -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+            image-rendering: auto;
+            transform: none;
+        }
+
+        /* ── Hero image: cinematic parallax shimmer effect ── */
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        /* Gold shimmer frame — animated border glow */
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 5px;
+            background: linear-gradient(135deg,
+                rgba(212,168,83,0.0) 0%,
+                rgba(212,168,83,0.6) 30%,
+                rgba(212,168,83,0.0) 50%,
+                rgba(212,168,83,0.5) 75%,
+                rgba(212,168,83,0.0) 100%
+            );
+            background-size: 300% 300%;
+            animation: heroShimmer 5s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Soft inner vignette overlay */
+        .hero-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, transparent 55%, rgba(10,10,10,0.18) 100%),
+                radial-gradient(ellipse at center, transparent 60%, rgba(10,10,10,0.08) 100%);
+            pointer-events: none;
+            z-index: 2;
+            border-radius: 3px;
+        }
+
+        /* Breathing float on the image itself */
+        .hero-image-wrapper img {
+            animation: heroFloat 7s ease-in-out infinite;
+        }
+
+        @keyframes heroShimmer {
+            0%   { background-position: 0% 0%; opacity: 0.7; }
+            50%  { background-position: 100% 100%; opacity: 1; }
+            100% { background-position: 0% 0%; opacity: 0.7; }
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: scale(1) translateY(0px); }
+            50%       { transform: scale(1.012) translateY(-5px); }
+        }
+
+        /* ── Scroll reveal states ── */
         .sr-init {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(48px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
         }
+
+        /* Section labels: slide in from left */
+        .sr-label {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        /* Titles: dramatic scale + rise */
         .sr-title {
             opacity: 0;
-            transform: translateY(52px) scale(0.97);
-            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(60px) scale(0.96);
+            transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
+
         .sr-init.sr-on,
+        .sr-label.sr-on,
         .sr-title.sr-on {
             opacity: 1;
             transform: none;
         }
+
+        /* Stagger delay classes for grid children */
+        .sr-d1 { transition-delay: 0ms; }
+        .sr-d2 { transition-delay: 100ms; }
+        .sr-d3 { transition-delay: 200ms; }
+        .sr-d4 { transition-delay: 300ms; }
+        .sr-d5 { transition-delay: 380ms; }
 
         /* ── Craft & Legacy: full-bleed photo cards on mobile ── */
         @media (max-width: 640px) {
@@ -2033,7 +2101,7 @@
                 <div class="hero-image-wrapper">
                     <!-- Placeholder for Grammy photo - replace with actual image -->
                     <!-- GitHub: Place IMG_3985.webp in /images/ folder -->
-                    <img src="images/IMG_3985.webp" alt="ISR and Chandani at the Grammys" loading="lazy">
+                    <img src="images/IMG_3985.webp" alt="ISR and Chandani at the Grammys" loading="eager" fetchpriority="high">
                 </div>
             </div>
         </div>
@@ -2096,8 +2164,8 @@
                         <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"/></svg>
                     </div>
                     <h3>Aesthetic Excellence: Your Signature Look</h3>
-                    <p style="margin-bottom:1rem;">With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, she brings an insider's lens to her platform, Reel Beautiful.</p>
-                    <p style="margin-bottom:1.75rem;">By deconstructing the secrets of the stars through interviews and conversations with top experts, she provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
+                    <p style="margin-bottom:1rem;">With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, Chandani brings an insider's lens to her platform, Reel Beautiful.</p>
+                    <p style="margin-bottom:1.75rem;">By deconstructing the secrets of the stars through interviews and conversations with top experts, Chandani provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
                     <ul class="service-list">
                         <li>Strategic Consultations: In-depth analysis of your unique aesthetic profile</li>
                         <li>The Blueprint: Tailored treatment planning for long-term beauty management</li>
@@ -2225,7 +2293,7 @@
             <div class="section-label">Craft &amp; Legacy</div>
             <h2 class="about-title display">Productions &amp; Placements</h2>
 
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;" class="projects-grid-3">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.75rem;" class="projects-grid-3">
 
                 <!-- Tum Par Hum Hai / Atke Yaara 2.0 -->
                 <div style="position:relative;overflow:hidden;border-radius:3px;background:#111;aspect-ratio:1/1;cursor:pointer;" class="portfolio-item contain-img">
@@ -2362,82 +2430,61 @@
             });
         }
 
-        // ── Scroll Reveal (Comprehensive) ───────────────────────
+        // ── Scroll Reveal — Definitive ──────────────────────────
         (function () {
-            if (!('IntersectionObserver' in window)) return;
+            var hero = document.querySelector('.hero');
+            function outsideHero(el) { return !hero || !hero.contains(el); }
 
-            // Selectors that get the dramatic TITLE entrance (scale + rise)
-            var titleSels = [
-                '.about-title',
-                '.contact-title'
-            ];
-
-            // Selectors that get the standard fade+rise
-            var revealSels = [
-                '.section-label',
-                '.service-category',
-                '.portfolio-item',
-                '.iv-item',
-                '.about-text',
-                '.about-content',
-                '.contact-subtitle',
-                '.contact-info',
-                '.contact-link',
-                '.carousel-slide',
-                '.work-press-card'
-            ];
-
-            var heroSection = document.querySelector('.hero');
-
-            function notInHero(el) {
-                return !heroSection || !heroSection.contains(el);
-            }
-
-            // Apply sr-title class to all title elements outside hero
-            titleSels.forEach(function (sel) {
-                document.querySelectorAll(sel).forEach(function (el) {
-                    if (notInHero(el)) el.classList.add('sr-title');
-                });
+            // 1. Section labels — slide from left
+            document.querySelectorAll('.section-label').forEach(function (el) {
+                if (outsideHero(el)) el.classList.add('sr-label');
             });
 
-            // Apply sr-init class to all reveal elements outside hero
-            revealSels.forEach(function (sel) {
-                document.querySelectorAll(sel).forEach(function (el) {
-                    if (notInHero(el)) el.classList.add('sr-init');
-                });
+            // 2. Section titles — dramatic scale+rise
+            document.querySelectorAll('.about-title, .contact-title').forEach(function (el) {
+                if (outsideHero(el)) el.classList.add('sr-title');
             });
 
-            // Stagger children in grid containers
-            var gridSels = [
-                '.services-grid',
-                '.portfolio-grid',
-                '.projects-grid-3',
-                '.interview-list'
-            ];
-            gridSels.forEach(function (sel) {
+            // 3. Everything else — fade+rise with per-element stagger
+            var revealEls = document.querySelectorAll(
+                '.about-text, .about-content,' +
+                '.service-category, .portfolio-item,' +
+                '.iv-item, .contact-subtitle, .contact-info,' +
+                '.contact-link, .work-press-card,' +
+                '.carousel-slide'
+            );
+            revealEls.forEach(function (el) {
+                if (outsideHero(el)) el.classList.add('sr-init');
+            });
+
+            // 4. Stagger grid children by index
+            ['.services-grid', '.portfolio-grid', '.projects-grid-3', '.interview-list'].forEach(function (sel) {
                 var parent = document.querySelector(sel);
                 if (!parent) return;
                 parent.querySelectorAll('.sr-init').forEach(function (el, i) {
-                    el.dataset.delay = Math.min(i * 100, 400);
+                    el.classList.add('sr-d' + Math.min(i + 1, 5));
                 });
             });
 
-            // Single IntersectionObserver for everything
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('.sr-label, .sr-title, .sr-init').forEach(function (el) {
+                    el.classList.add('sr-on');
+                });
+                return;
+            }
+
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (!entry.isIntersecting) return;
-                    var el = entry.target;
-                    var delay = parseInt(el.dataset.delay || '0', 10);
-                    setTimeout(function () {
-                        el.classList.add('sr-on');
-                    }, delay);
-                    io.unobserve(el);
+                    entry.target.classList.add('sr-on');
+                    io.unobserve(entry.target);
                 });
-            }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-            document.querySelectorAll('.sr-title, .sr-init').forEach(function (el) {
+            document.querySelectorAll('.sr-label, .sr-title, .sr-init').forEach(function (el) {
                 io.observe(el);
             });
+
         }());
 
         // ── Interview Modal ─────────────────────────────────────────

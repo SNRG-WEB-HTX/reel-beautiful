@@ -737,14 +737,14 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-top: 2.25rem;
-            align-items: stretch;
+            gap: 1rem;
+            margin-top: 2rem;
+            align-items: start; /* cards are natural height — no artificial void */
         }
 
         /* ── Base card ── */
         .service-category {
-            padding: 2.75rem;
+            padding: 2rem;
             border-radius: 4px;
             position: relative;
             overflow: hidden;
@@ -767,46 +767,37 @@
         }
         .service-category:hover::after { transform: scaleX(1); }
 
-        /* Card 01 — same cream scheme as 02 */
-        .service-category:first-child {
-            background: var(--cream);
-            border: 1px solid rgba(212,168,83,0.12);
-        }
-        .service-category:first-child:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 28px 70px rgba(0,0,0,0.14),
-                        0 0 0 1px rgba(212,168,83,0.4);
-        }
-
-        /* Card 02 — light */
+        /* Both cards — cream */
+        .service-category:first-child,
         .service-category:last-child {
             background: var(--cream);
             border: 1px solid rgba(212,168,83,0.12);
         }
+        .service-category:first-child:hover,
         .service-category:last-child:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 28px 70px rgba(0,0,0,0.14),
-                        0 0 0 1px rgba(212,168,83,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 56px rgba(0,0,0,0.13),
+                        0 0 0 1px rgba(212,168,83,0.35);
         }
 
-        /* Large watermark number — hidden */
+        /* Watermark number — hidden */
         .service-num { display: none; }
 
         /* Icon */
         .service-icon {
-            width: 44px; height: 44px;
-            border-radius: 8px;
+            width: 40px; height: 40px;
+            border-radius: 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
             color: var(--gold);
             border: 1px solid rgba(212,168,83,0.35);
             background: rgba(212,168,83,0.07);
             flex-shrink: 0;
         }
         .service-icon svg {
-            width: 20px; height: 20px;
+            width: 18px; height: 18px;
             stroke: currentColor; fill: none;
             stroke-width: 1.6;
             stroke-linecap: round; stroke-linejoin: round;
@@ -815,83 +806,78 @@
         /* Heading */
         .service-category h3 {
             font-family: var(--font-display);
-            font-size: clamp(1.35rem, 2.2vw, 2rem);
+            font-size: clamp(1.35rem, 2.2vw, 1.85rem);
             font-weight: 400;
             line-height: 1.18;
             letter-spacing: -0.015em;
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.65rem;
+            color: var(--deep-black);
             overflow-wrap: break-word;
             word-break: break-word;
             hyphens: auto;
         }
-        .service-category:first-child h3 { color: var(--deep-black); }
-        .service-category:last-child  h3 { color: var(--deep-black); }
 
         /* Body paragraph */
         .service-category p {
-            font-size: 0.92rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
+            line-height: 1.75;
             margin-bottom: 0;
+            color: var(--accent);
             overflow-wrap: break-word;
             word-break: break-word;
         }
-        .service-category:first-child p { color: var(--accent); }
-        .service-category:last-child  p { color: var(--accent); }
-        .service-category:last-child p[style] { color: var(--accent); }
+        .service-category p + p { margin-top: 0.85rem; }
 
         /* Service list — structured rows */
         .service-list {
             list-style: none;
-            margin: 1.6rem 0 0;
+            margin: 1rem 0 0;
             border-top: 1px solid rgba(212,168,83,0.1);
         }
         .service-list li {
             display: flex;
             align-items: baseline;
-            gap: 0.75rem;
-            font-size: 0.875rem;
-            line-height: 1.65;
-            padding: 0.7rem 0;
+            gap: 0.65rem;
+            font-size: 0.855rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+            padding: 0.5rem 0;
             border-bottom: 1px solid rgba(212,168,83,0.07);
         }
         .service-list li:last-child { border-bottom: none; }
         .service-list li::before {
             content: '—';
             color: var(--gold);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             flex-shrink: 0;
-            opacity: 0.6;
-            margin-top: 0.1em;
+            opacity: 0.55;
         }
-        .service-category:first-child .service-list li { color: var(--charcoal); }
-        .service-category:last-child  .service-list li { color: var(--charcoal); }
 
-        /* Push CTAs to bottom */
-        .service-spacer { flex: 1; min-height: 1.5rem; }
-
-        /* CTA row — centered, anchored at bottom */
+        /* CTA row — at bottom, centered */
+        .service-spacer { display: none; } /* no longer needed */
         .service-cta-row {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
+            gap: 1.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
             border-top: 1px solid rgba(212,168,83,0.12);
         }
 
-        /* CTA links — visually unmistakable */
+        /* CTA links */
         .service-video-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
             font-family: var(--font-body);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             text-decoration: none;
+            color: var(--deep-black);
             position: relative;
             padding-bottom: 3px;
             transition: color 0.25s ease, gap 0.25s ease;
@@ -901,24 +887,14 @@
             content: '';
             position: absolute;
             bottom: 0; left: 0;
-            height: 1px;
+            width: 0; height: 1px;
             background: var(--gold);
             transition: width 0.32s cubic-bezier(0.22,1,0.36,1);
         }
-        /* Both cards: dark text → gold on hover, underline only on hover */
-        .service-category:first-child .service-video-link,
-        .service-category:last-child  .service-video-link {
-            color: var(--deep-black);
-        }
-        .service-category:first-child .service-video-link::after,
-        .service-category:last-child  .service-video-link::after { width: 0; }
-        .service-category:first-child .service-video-link:hover,
-        .service-category:last-child  .service-video-link:hover { color: var(--gold); gap: 0.75rem; }
-        .service-category:first-child .service-video-link:hover::after,
-        .service-category:last-child  .service-video-link:hover::after { width: 100%; }
-
+        .service-video-link:hover { color: var(--gold); gap: 0.65rem; }
+        .service-video-link:hover::after { width: 100%; }
         .service-video-link svg {
-            width: 12px; height: 12px;
+            width: 11px; height: 11px;
             stroke: currentColor; fill: none;
             stroke-width: 1.8;
             stroke-linecap: round; stroke-linejoin: round;
@@ -927,17 +903,52 @@
         }
         .service-video-link:hover svg { transform: translateX(3px); }
 
+        /* Conversations with Excellence — inline, left-aligned in content flow */
+        .service-conversations-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--deep-black);
+            position: relative;
+            padding-bottom: 3px;
+            margin-top: 0.6rem;
+            transition: color 0.25s ease, gap 0.25s ease;
+        }
+        .service-conversations-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.32s cubic-bezier(0.22,1,0.36,1);
+        }
+        .service-conversations-link:hover { color: var(--gold); gap: 0.65rem; }
+        .service-conversations-link:hover::after { width: 100%; }
+        .service-conversations-link svg {
+            width: 11px; height: 11px;
+            stroke: currentColor; fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .service-conversations-link:hover svg { transform: translateX(3px); }
+
         /* Mobile */
         @media (max-width: 768px) {
-            .services-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .service-category { padding: 2rem 1.5rem; }
-            .service-num { font-size: 4rem; top: 1.25rem; right: 1.25rem; }
-            .service-category h3 { font-size: 1.5rem; }
-            .service-cta-row { gap: 1.25rem; }
+            .services-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+            .service-category { padding: 1.75rem 1.5rem; }
+            .service-category h3 { font-size: 1.4rem; }
         }
         @media (max-width: 480px) {
-            .service-category { padding: 1.75rem 1.25rem; }
-            .service-cta-row { flex-direction: column; align-items: center; gap: 1rem; }
+            .service-category { padding: 1.5rem 1.25rem; }
+            .service-cta-row { gap: 1.25rem; }
         }
         
         /* Portfolio Section */
@@ -2358,23 +2369,21 @@
             <div class="services-grid">
                 <!-- Music Production Services -->
                 <div class="service-category">
-                    <span class="service-num">01</span>
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                     </div>
                     <h3>The Reel World: From A to Z — We guide your journey from concept to celebration.</h3>
                     <p>End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</p>
-                    <a href="#interviews" class="service-video-link" style="margin-top:0.75rem;align-self:center;">
+                    <a href="#interviews" class="service-conversations-link">
                         Conversations with Excellence
                         <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
                     </a>
-                    <ul class="service-list" style="margin-top:1.5rem;">
+                    <ul class="service-list">
                         <li>Entertainment Media: Providing latest entertainment news and information through inside access and exclusive interviews.</li>
                         <li>Brand Strategy: We sharpen your vision, turning noise into a signal that your audience can't ignore.</li>
                         <li>Precision Songwriting: Music and lyrics composed with intent, engineered for maximum connection.</li>
                         <li>Global Launchpad: We handle the logistics of label pitching and international promotion so you can focus on the art.</li>
                     </ul>
-                    <div class="service-spacer"></div>
                     <div class="service-cta-row">
                         <a href="https://youtu.be/DXSDe1HF1VU" target="_blank" rel="noopener" class="service-video-link">
                             Watch Our Work
@@ -2385,14 +2394,12 @@
 
                 <!-- Beauty & Aesthetics Services -->
                 <div class="service-category">
-                    <span class="service-num">02</span>
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"/></svg>
                     </div>
                     <h3>The Beauty World: Own your look, through knowledge.</h3>
                     <p>With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, Chandani brings an insider's lens to her platform, Reel Beautiful.</p>
-                    <p style="margin-top:1rem;">By deconstructing the secrets of the stars through interviews and conversations with top experts, Chandani provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
-                    <div class="service-spacer"></div>
+                    <p>By deconstructing the secrets of the stars through interviews and conversations with top experts, Chandani provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
                     <div class="service-cta-row">
                         <a href="https://www.hollywoodhillsmag.com/post/the-real-secret-behind-achieving-reel-beauty" target="_blank" rel="noopener" class="service-video-link">
                             Read the Feature

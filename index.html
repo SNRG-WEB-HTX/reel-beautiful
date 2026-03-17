@@ -904,8 +904,28 @@
         .service-video-link:hover svg { transform: translateX(3px); }
 
         /* Reel World card — p is left-aligned, wraps naturally at all viewports */
-        .service-category:first-child > p {
+        .service-category:first-child > p,
+        .service-category:first-child > .service-p-link {
             text-align: left;
+        }
+
+        /* Clickable paragraph link — styled as body text but visibly interactive */
+        .service-p-link {
+            display: block;
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--accent);
+            text-decoration: none;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212,168,83,0.45);
+            padding-bottom: 2px;
+            transition: color 0.25s ease, border-color 0.25s ease;
+        }
+        .service-p-link:hover {
+            color: var(--gold);
+            border-color: var(--gold);
         }
 
         /* Beauty World card — breathing room between title and body */
@@ -1212,7 +1232,7 @@
         }
 
         .interviews .section-label { color: var(--gold); }
-        .interviews .about-title   { color: var(--deep-black); margin-bottom: 1.5rem; }
+        .interviews .about-title   { color: var(--deep-black); margin-bottom: 1.5rem; font-size: clamp(1.45rem, 3vw, 2.25rem); max-width: 820px; line-height: 1.25; }
 
         /* ── Service card CTA links — clean inline text ─────────── */
         .service-video-link {
@@ -2384,11 +2404,7 @@
                         <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                     </div>
                     <h3>The Reel World: From A to Z — We guide your journey from concept to celebration.</h3>
-                    <p>End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</p>
-                    <a href="#interviews" class="service-conversations-link">
-                        Conversations with Excellence
-                        <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
-                    </a>
+                    <a href="#interviews" class="service-p-link">End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</a>
                     <ul class="service-list">
                         <li>Entertainment Media: Providing latest entertainment news and information through inside access and exclusive interviews.</li>
                         <li>Brand Strategy: We sharpen your vision, turning noise into a signal that your audience can't ignore.</li>
@@ -2465,8 +2481,7 @@
     <section class="interviews" id="interviews">
         <div class="interviews-container">
             <div class="section-label">Reel People, Real Talk</div>
-            <h2 class="about-title display">Conversations with Excellence</h2>
-            <p class="editorial" style="font-size:1.05rem;color:var(--charcoal);max-width:640px;line-height:1.65;margin-bottom:2.5rem;">Providing latest entertainment news and information through inside access and exclusive interviews.</p>
+            <h2 class="about-title display">Providing latest entertainment news and information through inside access and exclusive interviews.</h2>
 
             <div class="interview-list" id="interviewGrid">
 

@@ -722,190 +722,222 @@
             font-weight: 500;
         }
         
-        /* Services Section */
+        /* ── Services Section ─────────────────────────────────────── */
         .services {
             padding: var(--space-2xl) 2rem;
-            background: var(--warm-white);
+            background: var(--deep-black);
         }
-        
         .services-container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+        .services .section-label { color: rgba(212,168,83,0.65); }
+        .services .about-title   { color: var(--warm-white); margin-bottom: 0.5rem; }
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            margin-top: 1.75rem;
+            gap: 1.25rem;
+            margin-top: 2.25rem;
+            align-items: stretch;
         }
-        
+
+        /* ── Base card ── */
         .service-category {
-            background: var(--cream);
             padding: 2.75rem;
-            border-radius: 6px;
-            transition: transform 0.35s var(--ease-smooth),
-                        box-shadow 0.35s var(--ease-smooth),
-                        border-color 0.35s var(--ease-smooth);
-            border: 1px solid rgba(212, 168, 83, 0.1);
+            border-radius: 4px;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform 0.38s cubic-bezier(0.22,1,0.36,1),
+                        box-shadow 0.38s cubic-bezier(0.22,1,0.36,1);
         }
 
-        /* Pushes the button to the bottom of each card */
-        .service-video-link {
-            margin-top: auto;
-            padding-top: 1.5rem;
-        }
-
+        /* Gold sweep line at bottom */
         .service-category::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--gold), transparent);
+            background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.4s var(--ease-smooth);
+            transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
         }
-        
-        .service-category:hover {
-            transform: translateY(-6px);
-            border-color: rgba(212, 168, 83, 0.9);
-            box-shadow:
-                0 0 0 1px rgba(212, 168, 83, 0.4),
-                0 0 20px rgba(212, 168, 83, 0.25),
-                0 0 60px rgba(212, 168, 83, 0.12),
-                0 20px 48px rgba(0, 0, 0, 0.1);
+        .service-category:hover::after { transform: scaleX(1); }
+
+        /* Card 01 — same cream scheme as 02 */
+        .service-category:first-child {
+            background: var(--cream);
+            border: 1px solid rgba(212,168,83,0.12);
+        }
+        .service-category:first-child:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.14),
+                        0 0 0 1px rgba(212,168,83,0.4);
         }
 
-        .service-category:hover::after {
-            transform: scaleX(1);
+        /* Card 02 — light */
+        .service-category:last-child {
+            background: var(--cream);
+            border: 1px solid rgba(212,168,83,0.12);
+        }
+        .service-category:last-child:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.14),
+                        0 0 0 1px rgba(212,168,83,0.4);
         }
 
-        /* Active/focus state for touch devices */
-        .service-category:focus-within,
-        .service-category.active {
-            border-color: rgba(212, 168, 83, 0.9);
-            box-shadow:
-                0 0 0 1px rgba(212, 168, 83, 0.4),
-                0 0 20px rgba(212, 168, 83, 0.25),
-                0 0 60px rgba(212, 168, 83, 0.12),
-                0 20px 48px rgba(0, 0, 0, 0.1);
-        }
+        /* Large watermark number — hidden */
+        .service-num { display: none; }
 
-        /* Video link inside card */
-        .service-video-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.55rem;
-            font-family: var(--font-body);
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--deep-black);
-            text-decoration: none;
-            padding: 0.55rem 1.1rem;
-            border: 1.5px solid rgba(212, 168, 83, 0.5);
-            border-radius: 3px;
-            align-self: flex-start;
-            transition: color 0.25s var(--ease-smooth),
-                        border-color 0.25s var(--ease-smooth),
-                        box-shadow 0.25s var(--ease-smooth),
-                        background 0.25s var(--ease-smooth);
-        }
-
-        .service-video-link:hover,
-        .service-video-link:focus,
-        .service-video-link.active {
-            color: var(--deep-black);
-            border-color: rgba(212, 168, 83, 1);
-            background: rgba(212, 168, 83, 0.06);
-            box-shadow:
-                0 0 0 1px rgba(212, 168, 83, 0.35),
-                0 0 14px rgba(212, 168, 83, 0.3),
-                0 0 40px rgba(212, 168, 83, 0.12);
-            outline: none;
-        }
-
-        .service-video-link svg {
-            width: 15px; height: 15px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
-        
+        /* Icon */
         .service-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: rgba(10, 10, 10, 0.04);
-            border: 1.5px solid rgba(10, 10, 10, 0.75);
+            width: 44px; height: 44px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--gold);
+            border: 1px solid rgba(212,168,83,0.35);
+            background: rgba(212,168,83,0.07);
+            flex-shrink: 0;
+        }
+        .service-icon svg {
+            width: 20px; height: 20px;
+            stroke: currentColor; fill: none;
+            stroke-width: 1.6;
+            stroke-linecap: round; stroke-linejoin: round;
         }
 
-        .service-icon svg {
-            width: 22px; height: 22px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.7;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        
+        /* Heading */
         .service-category h3 {
             font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 500;
+            font-size: clamp(1.35rem, 2.2vw, 2rem);
+            font-weight: 400;
+            line-height: 1.18;
+            letter-spacing: -0.015em;
             margin-bottom: 0.85rem;
-            color: var(--deep-black);
-            line-height: 1.2;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
-        
+        .service-category:first-child h3 { color: var(--deep-black); }
+        .service-category:last-child  h3 { color: var(--deep-black); }
+
+        /* Body paragraph */
         .service-category p {
-            font-size: 0.95rem;
-            line-height: 1.75;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
+            font-size: 0.92rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
-        
+        .service-category:first-child p { color: var(--accent); }
+        .service-category:last-child  p { color: var(--accent); }
+        .service-category:last-child p[style] { color: var(--accent); }
+
+        /* Service list — structured rows */
         .service-list {
             list-style: none;
+            margin: 1.6rem 0 0;
+            border-top: 1px solid rgba(212,168,83,0.1);
         }
-        
         .service-list li {
-            font-size: 0.9rem;
-            line-height: 1.8;
-            color: var(--charcoal);
-            padding-left: 1.25rem;
-            position: relative;
-            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            line-height: 1.65;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(212,168,83,0.07);
         }
-        
+        .service-list li:last-child { border-bottom: none; }
         .service-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.65em;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--gold);
+            content: '—';
+            color: var(--gold);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            opacity: 0.6;
+            margin-top: 0.1em;
+        }
+        .service-category:first-child .service-list li { color: var(--charcoal); }
+        .service-category:last-child  .service-list li { color: var(--charcoal); }
+
+        /* Push CTAs to bottom */
+        .service-spacer { flex: 1; min-height: 1.5rem; }
+
+        /* CTA row — centered, anchored at bottom */
+        .service-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(212,168,83,0.12);
         }
 
+        /* CTA links — visually unmistakable */
+        .service-video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.25s ease, gap 0.25s ease;
+            white-space: nowrap;
+        }
+        .service-video-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.32s cubic-bezier(0.22,1,0.36,1);
+        }
+        /* Both cards: dark text → gold on hover, underline only on hover */
+        .service-category:first-child .service-video-link,
+        .service-category:last-child  .service-video-link {
+            color: var(--deep-black);
+        }
+        .service-category:first-child .service-video-link::after,
+        .service-category:last-child  .service-video-link::after { width: 0; }
+        .service-category:first-child .service-video-link:hover,
+        .service-category:last-child  .service-video-link:hover { color: var(--gold); gap: 0.75rem; }
+        .service-category:first-child .service-video-link:hover::after,
+        .service-category:last-child  .service-video-link:hover::after { width: 100%; }
+
+        .service-video-link svg {
+            width: 12px; height: 12px;
+            stroke: currentColor; fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .service-video-link:hover svg { transform: translateX(3px); }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+            .services-grid { grid-template-columns: 1fr; gap: 1rem; }
             .service-category { padding: 2rem 1.5rem; }
+            .service-num { font-size: 4rem; top: 1.25rem; right: 1.25rem; }
             .service-category h3 { font-size: 1.5rem; }
+            .service-cta-row { gap: 1.25rem; }
+        }
+        @media (max-width: 480px) {
+            .service-category { padding: 1.75rem 1.25rem; }
+            .service-cta-row { flex-direction: column; align-items: center; gap: 1rem; }
         }
         
         /* Portfolio Section */
@@ -1057,12 +1089,15 @@
             object-position: center center;
             display: block;
             image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
             pointer-events: none;
-            transition: transform 0.5s var(--ease-smooth);
+            transition: transform 0.5s var(--ease-smooth), filter 0.5s var(--ease-smooth);
+            filter: contrast(1.06) brightness(1.04) saturate(1.08);
         }
 
         .carousel-slide:hover .carousel-slide-inner img {
             transform: scale(1.02);
+            filter: contrast(1.1) brightness(1.07) saturate(1.12);
         }
 
         /* Prev / Next */
@@ -1156,6 +1191,135 @@
 
         .interviews .section-label { color: var(--gold); }
         .interviews .about-title   { color: var(--deep-black); margin-bottom: 1.5rem; }
+
+        /* ── Service card CTA links — clean inline text ─────────── */
+        .service-video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--deep-black);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+            transition: color 0.25s ease, gap 0.25s ease;
+            align-self: flex-start;
+        }
+        .service-video-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s cubic-bezier(0.22,1,0.36,1);
+        }
+        .service-video-link:hover { color: var(--gold); gap: 0.75rem; }
+        .service-video-link:hover::after { width: 100%; }
+        .service-video-link svg {
+            width: 13px; height: 13px;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .service-video-link:hover svg { transform: translateX(3px); }
+
+        /* ── Editorial article cards — numbered rows ────────────── */
+        .rb-articles-grid {
+            margin-top: 3rem;
+            border-top: 1px solid rgba(212,168,83,0.2);
+        }
+        .rb-article-card {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr auto;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(212,168,83,0.12);
+            text-decoration: none;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+        .rb-article-card::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem; right: -1.5rem; top: 0; bottom: 0;
+            background: rgba(212,168,83,0.035);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+        .rb-article-card:hover::before { opacity: 1; }
+
+        .rb-article-num {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--gold);
+            opacity: 0.7;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+        .rb-article-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 0;
+        }
+        .rb-article-source {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.85;
+        }
+        .rb-article-headline {
+            font-family: var(--font-display);
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            font-weight: 400;
+            color: var(--deep-black);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+        .rb-article-arrow {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,168,83,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--charcoal);
+            transition: border-color 0.25s, color 0.25s, transform 0.25s;
+        }
+        .rb-article-arrow svg {
+            width: 13px; height: 13px;
+            stroke: currentColor; fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round;
+            transition: transform 0.25s ease;
+        }
+        .rb-article-card:hover .rb-article-arrow {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .rb-article-card:hover .rb-article-arrow svg {
+            transform: translate(2px, -2px);
+        }
+
+        @media (max-width: 640px) {
+            .rb-article-card {
+                grid-template-columns: 2.5rem 1fr auto;
+                gap: 1rem;
+                padding: 1.25rem 0;
+            }
+            .rb-article-num { font-size: 0.95rem; }
+            .rb-article-headline { font-size: 1rem; }
+            .rb-article-arrow { width: 30px; height: 30px; }
+        }
 
         /* Card grid — matches Our Work layout */
         .interview-list {
@@ -2194,35 +2358,47 @@
             <div class="services-grid">
                 <!-- Music Production Services -->
                 <div class="service-category">
+                    <span class="service-num">01</span>
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                     </div>
                     <h3>The Reel World: From A to Z — We guide your journey from concept to celebration.</h3>
                     <p>End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</p>
-                    <ul class="service-list">
+                    <a href="#interviews" class="service-video-link" style="margin-top:0.75rem;align-self:center;">
+                        Conversations with Excellence
+                        <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
+                    </a>
+                    <ul class="service-list" style="margin-top:1.5rem;">
+                        <li>Entertainment Media: Providing latest entertainment news and information through inside access and exclusive interviews.</li>
                         <li>Brand Strategy: We sharpen your vision, turning noise into a signal that your audience can't ignore.</li>
                         <li>Precision Songwriting: Music and lyrics composed with intent, engineered for maximum connection.</li>
                         <li>Global Launchpad: We handle the logistics of label pitching and international promotion so you can focus on the art.</li>
                     </ul>
-                    <a href="https://youtu.be/DXSDe1HF1VU" target="_blank" rel="noopener" class="service-video-link">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        Watch Our Work
-                    </a>
+                    <div class="service-spacer"></div>
+                    <div class="service-cta-row">
+                        <a href="https://youtu.be/DXSDe1HF1VU" target="_blank" rel="noopener" class="service-video-link">
+                            Watch Our Work
+                            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Beauty & Aesthetics Services -->
                 <div class="service-category">
+                    <span class="service-num">02</span>
                     <div class="service-icon">
-                        <!-- 4-point star / sparkle — modern, minimal -->
                         <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"/></svg>
                     </div>
                     <h3>The Beauty World: Own your look, through knowledge.</h3>
-                    <p style="margin-bottom:1rem;">With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, Chandani brings an insider's lens to her platform, Reel Beautiful.</p>
-                    <p>By deconstructing the secrets of the stars through interviews and conversations with top experts, Chandani provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
-                    <a href="https://www.hollywoodhillsmag.com/post/the-real-secret-behind-achieving-reel-beauty" target="_blank" rel="noopener" class="service-video-link">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M17 14h.01"/><path d="M14 14h.01"/><path d="M20 14h.01"/><path d="M17 17h.01"/><path d="M14 17h.01"/><path d="M20 17h.01"/><path d="M17 20h.01"/><path d="M14 20h.01"/><path d="M20 20h.01"/></svg>
-                        Read the Feature
-                    </a>
+                    <p>With a journalism degree, a background in medical aesthetics, and years of front-line entertainment experience as the face of multiple major projects, Chandani brings an insider's lens to her platform, Reel Beautiful.</p>
+                    <p style="margin-top:1rem;">By deconstructing the secrets of the stars through interviews and conversations with top experts, Chandani provides the roadmap and education for her audience to gain the professional knowledge and lasting confidence needed to define their own signature style.</p>
+                    <div class="service-spacer"></div>
+                    <div class="service-cta-row">
+                        <a href="https://www.hollywoodhillsmag.com/post/the-real-secret-behind-achieving-reel-beauty" target="_blank" rel="noopener" class="service-video-link">
+                            Read the Feature
+                            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2272,6 +2448,7 @@
         <div class="interviews-container">
             <div class="section-label">Reel People, Real Talk</div>
             <h2 class="about-title display">Conversations with Excellence</h2>
+            <p class="editorial" style="font-size:1.05rem;color:var(--charcoal);max-width:640px;line-height:1.65;margin-bottom:2.5rem;">Providing latest entertainment news and information through inside access and exclusive interviews.</p>
 
             <div class="interview-list" id="interviewGrid">
 
@@ -2336,10 +2513,52 @@
                 </div>
 
             </div>
+
+            <!-- Articles -->
+            <div class="rb-articles-grid">
+                <a href="https://www.hollywoodhillsmag.com/post/shohei-ohtani-the-greatest-of-all-time" target="_blank" rel="noopener" class="rb-article-card">
+                    <span class="rb-article-num">01</span>
+                    <div class="rb-article-body">
+                        <span class="rb-article-source">Hollywood Hills Magazine</span>
+                        <span class="rb-article-headline">Shohei Ohtani: The Greatest of All Time</span>
+                    </div>
+                    <div class="rb-article-arrow">
+                        <svg viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6 3 13 3 13 10"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.hollywoodhillsmag.com/post/ariana-grande-delivers-an-oscar-worthy-performance-in-wicked-for-good" target="_blank" rel="noopener" class="rb-article-card">
+                    <span class="rb-article-num">02</span>
+                    <div class="rb-article-body">
+                        <span class="rb-article-source">Hollywood Hills Magazine</span>
+                        <span class="rb-article-headline">Ariana Grande Delivers an Oscar-Worthy Performance in Wicked For Good</span>
+                    </div>
+                    <div class="rb-article-arrow">
+                        <svg viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6 3 13 3 13 10"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.hollywoodhillsmag.com/post/taylor-swift-the-official-release-party-of-a-showgirl-a-taylor-made-theatrical-experience" target="_blank" rel="noopener" class="rb-article-card">
+                    <span class="rb-article-num">03</span>
+                    <div class="rb-article-body">
+                        <span class="rb-article-source">Hollywood Hills Magazine</span>
+                        <span class="rb-article-headline">Taylor Swift: The Official Release Party of A Showgirl — A Taylor-Made Theatrical Experience</span>
+                    </div>
+                    <div class="rb-article-arrow">
+                        <svg viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6 3 13 3 13 10"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.hollywoodhillsmag.com/post/the-real-secret-behind-achieving-reel-beauty" target="_blank" rel="noopener" class="rb-article-card">
+                    <span class="rb-article-num">04</span>
+                    <div class="rb-article-body">
+                        <span class="rb-article-source">Hollywood Hills Magazine</span>
+                        <span class="rb-article-headline">The Real Secret Behind Achieving Reel Beauty</span>
+                    </div>
+                    <div class="rb-article-arrow">
+                        <svg viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="6 3 13 3 13 10"/></svg>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
     <section style="padding:var(--space-2xl) 2rem;background:var(--warm-white);">
         <div style="max-width:1400px;margin:0 auto;">
             <div class="section-label">Craft &amp; Legacy</div>

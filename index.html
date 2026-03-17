@@ -909,8 +909,73 @@
             text-align: left;
         }
 
-        /* Clickable paragraph link — styled as body text but visibly interactive */
-        .service-p-link {
+        /* Plain subtitle paragraph — no link styling */
+        .service-p-plain {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: var(--accent);
+            overflow-wrap: break-word;
+            word-break: break-word;
+            margin-bottom: 0;
+        }
+
+        /* Entertainment Media — prominent clickable link */
+        .service-em-link {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.65;
+            letter-spacing: 0.01em;
+            color: var(--deep-black);
+            text-decoration: none;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            padding: 0.7rem 0.9rem;
+            margin-bottom: 0;
+            border-left: 2px solid var(--gold);
+            background: rgba(212,168,83,0.05);
+            border-radius: 0 3px 3px 0;
+            transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+        }
+        .service-em-link svg {
+            display: inline-block;
+            width: 11px; height: 11px;
+            stroke: currentColor; fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round; stroke-linejoin: round;
+            margin-left: 0.35rem;
+            vertical-align: middle;
+            position: relative; top: -1px;
+            opacity: 0.75;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+        .service-em-link:hover {
+            background: rgba(212,168,83,0.1);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+        .service-em-link:hover svg { opacity: 1; transform: translate(2px,-2px); }
+
+        /* Clickable list item link with arrow */
+        .service-list-link {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.22s ease;
+        }
+        .service-list-link:hover { color: var(--gold); }
+        .service-list-link svg {
+            width: 10px; height: 10px;
+            stroke: currentColor; fill: none;
+            flex-shrink: 0;
+            opacity: 0.7;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+            position: relative; top: -1px;
+        }
+        .service-list-link:hover svg { opacity: 1; transform: translate(2px, -2px); }
             display: block;
             font-size: 0.9rem;
             line-height: 1.75;
@@ -2384,7 +2449,7 @@
                         From films including National Award winning actor Rajkummar Rao, iconic Bo Derek to having a project like "Pind De Gerhe"—also known as "Kali Activa"—which is a cultural staple.
                     </p>
                     <p>
-                        Now, <span class="about-highlight">stop worrying about the 'how' and start focusing on the 'what.'</span> We provide the infrastructure for your success, turning your vision into a reality that leaves nothing to chance.
+                        Now, <span class="about-highlight">stop worrying about the 'how' and start focusing on the 'what.'</span> We provide the infrastructure and information for your success, turning your vision into a reality that leaves nothing to chance.
                     </p>
                 </div>
             </div>
@@ -2404,9 +2469,9 @@
                         <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                     </div>
                     <h3>The Reel World: From A to Z — We guide your journey from concept to celebration.</h3>
-                    <a href="#interviews" class="service-p-link">End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</a>
+                    <a href="#interviews" class="service-em-link">Entertainment Media: Providing latest entertainment news and information through inside access and exclusive interviews.<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="13" x2="13" y2="3"/><polyline points="8 3 13 3 13 8"/></svg></a>
                     <ul class="service-list">
-                        <li>Entertainment Media: Providing latest entertainment news and information through inside access and exclusive interviews.</li>
+                        <li>End-to-End Production: We bridge the gap between imagination and reality—from the first concept to the final frame.</li>
                         <li>Brand Strategy: We sharpen your vision, turning noise into a signal that your audience can't ignore.</li>
                         <li>Precision Songwriting: Music and lyrics composed with intent, engineered for maximum connection.</li>
                         <li>Global Launchpad: We handle the logistics of label pitching and international promotion so you can focus on the art.</li>

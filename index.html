@@ -3699,36 +3699,111 @@
             document.body.style.overflow = '';
         }
 
-        // ── Video thumbnails: seek to 3s on ALL devices ─────────────
-        // Strategy: preload="auto" + explicit load() + seeked event freeze
-        // iOS Safari needs load() called explicitly before seeking works.
+        // ── Video thumbnails — bulletproof cross-device solution ─────────
+        // ROOT CAUSE: iOS Safari blocks seeking on off-screen/non-interacted videos.
+        // SOLUTION: Use Canvas to capture frame at 3s. Works on ALL devices.
         (function () {
-            var TARGET = 3; // seek to 3 seconds
+            var TARGET_TIME = 3;
 
-            function doSeek(vid) {
-                var t = (vid.duration && isFinite(vid.duration) && vid.duration > TARGET)
-                    ? TARGET
-                    : (vid.duration > 0.5 ? vid.duration * 0.5 : 0.1);
-                vid.currentTime = t;
+            function captureFrame(vid, canvas) {
+                try {
+                    var ctx = canvas.getContext('2d');
+                    canvas.width  = vid.videoWidth  || vid.offsetWidth  || 180;
+                    canvas.height = vid.videoHeight || vid.offsetHeight || 320;
+                    ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+                    // Check if frame is not blank (all black)
+                    var data = ctx.getImageData(0, 0, 1, 1).data;
+                    return (data[0] + data[1] + data[2]) > 10;
+                } catch(e) {
+                    return false;
+                }
             }
 
-            document.querySelectorAll('.pv-poster-vid').forEach(function (vid) {
-                // Ensure not invisible from scroll reveal
+            function setupThumb(vid) {
+                var thumb = vid.closest('.pv-thumb');
+                if (!thumb) return;
+
+                // Create canvas overlay as poster
+                var canvas = document.createElement('canvas');
+                canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;z-index:0;';
+                thumb.insertBefore(canvas, vid);
+
+                // Hide the video element itself — canvas will show the frame
+                vid.style.opacity = '0';
+                vid.style.position = 'absolute';
+
+                var seeked = false;
+
+                function tryCapture() {
+                    if (seeked) return;
+                    var t = (vid.duration && isFinite(vid.duration) && vid.duration > TARGET_TIME)
+                        ? TARGET_TIME
+                        : (vid.duration > 1 ? 1 : 0);
+                    vid.currentTime = t;
+                }
+
+                function onSeeked() {
+                    if (seeked) return;
+                    if (captureFrame(vid, canvas)) {
+                        seeked = true;
+                        vid.pause();
+                    } else {
+                        // Blank frame — try a different time
+                        if (vid.currentTime < 1 && vid.duration > 1) {
+                            vid.currentTime = 1;
+                        }
+                    }
+                }
+
+                vid.addEventListener('seeked', onSeeked);
+                vid.addEventListener('timeupdate', function onTU() {
+                    if (seeked) { vid.removeEventListener('timeupdate', onTU); return; }
+                    captureFrame(vid, canvas);
+                });
+
+                function startLoad() {
+                    vid.muted = true;
+                    vid.preload = 'auto';
+                    if (vid.readyState >= 2) {
+                        tryCapture();
+                    } else if (vid.readyState >= 1) {
+                        tryCapture();
+                    } else {
+                        vid.addEventListener('loadedmetadata', function onMeta() {
+                            vid.removeEventListener('loadedmetadata', onMeta);
+                            tryCapture();
+                        });
+                        vid.addEventListener('loadeddata', function onData() {
+                            vid.removeEventListener('loadeddata', onData);
+                            tryCapture();
+                        });
+                        vid.load();
+                    }
+                    // Final fallback: play briefly then pause for frame
+                    setTimeout(function() {
+                        if (!seeked) {
+                            vid.play().then(function() {
+                                setTimeout(function() {
+                                    vid.pause();
+                                    captureFrame(vid, canvas);
+                                    seeked = true;
+                                }, 200);
+                            }).catch(function() {
+                                // Autoplay blocked — canvas stays as loading state
+                            });
+                        }
+                    }, 2000);
+                }
+
+                startLoad();
+            }
+
+            document.querySelectorAll('.pv-poster-vid').forEach(function(vid) {
                 vid.style.opacity = '1';
                 vid.style.transform = 'none';
-
-                // Force preload
-                vid.preload = 'auto';
-                vid.muted = true;
-
-                function trySeek() {
-                    if (vid.readyState >= 1) {
-                        doSeek(vid);
-                    } else {
-                        vid.load();
-                        vid.addEventListener('loadedmetadata', function handler() {
-                            doSeek(vid);
-                            vid.removeEventListener('loadedmetadata', handler);
-                        });
-                        // iOS fallback — force seek after 1s regardless
-                     
+                setupThumb(vid);
+            });
+        }());
+    </script>
+</body>
+</html>

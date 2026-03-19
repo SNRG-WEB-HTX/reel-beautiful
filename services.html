@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Disable Cloudflare email obfuscation -->
+    <meta name="cf-2fa-verify" content="no">
+    <meta http-equiv="x-cf-settings" content="email_obfuscation=off">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services — Reel Beautiful</title>
     <meta name="description" content="Reel Beautiful — Latest entertainment news, information, and services. Inside access, exclusive interviews, beauty knowledge, and partnership opportunities.">
@@ -379,8 +382,19 @@
             .services-wrap { padding: 0 1.25rem 4rem; }
             .svc-block { padding: 2.5rem 0; }
             .svc-cols, .svc-tiers, .svc-press-grid { grid-template-columns: 1fr; }
-            .svc-actions { flex-direction: column; }
-            .svc-btn { justify-content: center; }
+            .svc-actions {
+                flex-direction: column;
+                gap: 0.65rem;
+            }
+            .svc-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.25rem;
+                min-height: 48px;
+                white-space: normal;
+                text-align: center;
+                box-sizing: border-box;
+            }
             .svc-payment-row { flex-direction: column; }
             .svc-pay-item { width: 100%; }
         }
@@ -471,7 +485,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     Setup a Call or Zoom
                 </a>
-                <a href="/cdn-cgi/l/email-protection#86f4e3e3eae4e3e7f3f2efe0f3eaa8e9e0e0efe5efe7eac6e1ebe7efeaa8e5e9ebb9f5f3e4ece3e5f2bbd6e7f4f2e8e3f4f5eeeff6a3b4b6cfe8f7f3eff4ffa3b4b6a3c3b4a3beb6a3bfb2a3b4b6d4e3e3eaa3b4b6c4e3e7f3f2efe0f3eaa0e4e9e2ffbbceefa3b4b6cfd5d4a3b4b6a3b4b0a3b4b6c5eee7e8e2e7e8efa3b4c5a3b6c7a3b6c7cfa3b4b6e7eba3b4b6efe8f2e3f4e3f5f2e3e2a3b4b6efe8a3b4b6e7a3b4b6f6e7f4f2e8e3f4f5eeeff6a3b4b6f1eff2eea3b4b6d4e3e3eaa3b4b6c4e3e7f3f2efe0f3eaa8a3b6c7a3b6c7c8e7ebe3a3b5c7a3b4b6a3b6c7c5e9ebf6e7e8ffa3b4c0c4f4e7e8e2a3b5c7a3b4b6a3b6c7d2efe3f4a3b4b6cfe8f2e3f4e3f5f2a3b5c7a3b4b6c0e3e7f2f3f4e3a3b4b6c3fef6e3f4efe3e8e5e3a3b4b6a3b4b2b7a3b4c5b6b6b6a3b4b6a3b4c0a3b4b6d5f2f4e7f2e3e1efe5a3b4b6c7e2a3b4b6a3b4b2b3b6b6a3b6c7d6f4e9f6e9f5e7eaa3b5c7a3b4b6a3b6c7a3b6c7cae9e9edefe8e1a3b4b6e0e9f4f1e7f4e2a3b4b6f2e9a3b4b6e5e9e8e8e3e5f2efe8e1a8" class="svc-btn svc-btn-outline">
+                <a href="mailto:reelbeautiful.official@gmail.com?subject=Partnership%20Inquiry%20%E2%80%94%20Reel%20Beautiful&body=Hi%20ISR%20%26%20Chandani%2C%0A%0AI%20am%20interested%20in%20a%20partnership%20with%20Reel%20Beautiful.%0A%0AName%3A%20%0ACompany%2FBrand%3A%20%0ATier%20Interest%3A%20Feature%20Experience%20%241%2C000%20%2F%20Strategic%20Ad%20%24500%0AProposal%3A%20%0A%0ALooking%20forward%20to%20connecting." class="svc-btn svc-btn-outline">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     Inquire by Email
                 </a>

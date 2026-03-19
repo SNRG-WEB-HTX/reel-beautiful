@@ -2428,8 +2428,20 @@
                 gap: 0.5rem;
             }
             .partner-tiers { grid-template-columns: 1fr; }
-            .partner-actions { flex-direction: column; }
-            .partnership-cta { justify-content: center; }
+            .partner-actions {
+                flex-direction: column;
+                gap: 0.65rem;
+            }
+            .partnership-cta {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.25rem;
+                min-height: 48px;
+                white-space: normal;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .partnership-cta-outline { width: 100%; }
             .partner-payment-row { flex-direction: column; }
             .partner-pay-item { width: 100%; }
         }
@@ -2902,7 +2914,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     Setup a Call or Zoom
                 </a>
-                <a href="/cdn-cgi/l/email-protection#374552525b55525642435e51425b195851515e545e565b77505a565e5b1954585a084442555d5254430a67564543595245445f5e471205077e5946425e454e120507127205120f07120e031205076552525b12050775525642435e51425b115558534e0a7f5e1205077e6465120507120501120507745f56595356595e1205741207761207767e120507565a1205075e5943524552444352531205075e591205075612050747564543595245445f5e47120507405e435f1205076552525b12050775525642435e51425b1912077612077679565a5212047612050712077674585a4756594e1205717545565953120476120507120776635e52451205077e5943524552444312047612050771525643424552120507724f4752455e5259545212050712050306120574070707120507120571120507644345564352505e541205077653120507120503020707120776674558475844565b1204761205071207761207767b58585c5e5950120507515845405645531205074358120507545859595254435e595019" class="partnership-cta partnership-cta-outline">
+                <a href="mailto:reelbeautiful.official@gmail.com?subject=Partnership%20Inquiry%20%E2%80%94%20Reel%20Beautiful&body=Hi%20ISR%20%26%20Chandani%2C%0A%0AI%20am%20interested%20in%20a%20partnership%20with%20Reel%20Beautiful.%0A%0AName%3A%20%0ACompany%2FBrand%3A%20%0ATier%20Interest%3A%20Feature%20Experience%20%241%2C000%20%2F%20Strategic%20Ad%20%24500%0AProposal%3A%20%0A%0ALooking%20forward%20to%20connecting." class="partnership-cta partnership-cta-outline">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     Inquire by Email
                 </a>
@@ -3040,7 +3052,7 @@
     </footer>
 
     <!-- JavaScript: at end of body — DOM guaranteed ready, no DOMContentLoaded needed -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ── Mobile Menu Toggle ──────────────────────────────────
         var menuToggle = document.getElementById('menuToggle');
         var navLinks   = document.getElementById('navLinks');

@@ -2183,10 +2183,16 @@
         }
 
         .pv-poster-vid {
-            width: 100%; height: 100%;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
             pointer-events: none;
+            /* Exclude from scroll reveal opacity */
+            opacity: 1 !important;
+            transform: none !important;
         }
 
         .pv-play {
@@ -2387,25 +2393,31 @@
         }
 
         .partner-pay-item {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.65rem;
             background: rgba(250,248,245,0.05);
             border: 1px solid rgba(212,168,83,0.15);
             border-radius: 8px;
-            padding: 0.8rem 1.1rem;
+            padding: 0.75rem 1.25rem;
             text-decoration: none;
             color: var(--warm-white);
             font-family: var(--font-body);
-            font-size: 0.88rem;
-            font-weight: 500;
-            line-height: 1.4;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
             transition: border-color 0.25s, background 0.25s;
         }
 
         .partner-pay-item:hover {
-            border-color: rgba(212,168,83,0.5);
-            background: rgba(250,248,245,0.08);
+            border-color: rgba(212,168,83,0.55);
+            background: rgba(250,248,245,0.09);
+        }
+
+        .partner-pay-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--warm-white);
         }
 
         /* Mobile */
@@ -2429,6 +2441,121 @@
 
         @media (min-width: 769px) and (max-width: 1100px) {
             .partnership-videos { grid-template-columns: repeat(5, 1fr); }
+        }
+        /* ── Reel & Press standalone section ────────────────── */
+        .reel-press-section {
+            padding: var(--space-2xl) 2rem;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .reel-press-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,168,83,0.3), transparent);
+        }
+
+        .reel-press-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .reel-press-section .section-label { color: var(--charcoal); }
+        .reel-press-section .about-title { color: var(--deep-black); margin-bottom: 1.5rem; }
+
+        .reel-press-videos {
+            margin-bottom: 0;
+        }
+
+        /* Override press card colors for light background */
+        .reel-press-section .partner-press-card {
+            background: rgba(10,10,10,0.03);
+            border-color: rgba(10,10,10,0.1);
+        }
+
+        .reel-press-section .partner-press-card:hover {
+            border-color: rgba(212,168,83,0.55);
+            background: rgba(10,10,10,0.06);
+        }
+
+        .reel-press-section .partner-press-headline {
+            color: var(--deep-black);
+        }
+
+        .reel-press-section .partner-press-arrow {
+            color: rgba(10,10,10,0.38);
+        }
+
+        .reel-press-section .partner-press-label {
+            color: rgba(10,10,10,0.38);
+        }
+
+        @media (max-width: 640px) {
+            .reel-press-section { padding: 2.5rem 1.25rem; }
+        }
+
+        /* ── Partner press articles (shared, used in both sections) ── */
+        .partner-press-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(250,248,245,0.38);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .partner-press-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .partner-press-card {
+            background: rgba(250,248,245,0.04);
+            border: 1px solid rgba(212,168,83,0.14);
+            border-radius: 6px;
+            padding: 1.1rem 1.25rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: border-color 0.25s, background 0.25s;
+        }
+
+        .partner-press-card:hover {
+            border-color: rgba(212,168,83,0.5);
+            background: rgba(250,248,245,0.07);
+        }
+
+        .partner-press-source {
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .partner-press-headline {
+            font-family: var(--font-editorial);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--warm-white);
+            line-height: 1.4;
+        }
+
+        .partner-press-arrow {
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            color: rgba(250,248,245,0.38);
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 480px) {
+            .partner-press-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -2500,7 +2627,7 @@
                         From films including National Award winning actor Rajkummar Rao, iconic Bo Derek to having a project like "Pind De Gerhe"—also known as "Kali Activa"—which is a cultural staple.
                     </p>
                     <p>
-                        Now, <span class="about-highlight">stop worrying about the 'how' and start focusing on the 'what.'</span> We provide the infrastructure for your success, turning your vision into a reality that leaves nothing to chance.
+                        Now, <span class="about-highlight">stop worrying about the 'how' and start focusing on the 'what.'</span> We provide the infrastructure and information for your success, turning your vision into a reality that leaves nothing to chance.
                     </p>
                 </div>
             </div>
@@ -2657,6 +2784,77 @@
         </div>
     </section>
 
+    <!-- Reel & Press Section — between Interviews and Partnership -->
+    <section class="reel-press-section" id="reel">
+        <div class="reel-press-container">
+
+            <div class="section-label">Our Reel</div>
+            <h2 class="about-title display">Watch &amp; Read</h2>
+
+            <!-- Video Grid -->
+            <div class="partnership-videos reel-press-videos">
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_04.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_04.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_05.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_05.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_06.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_06.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_07.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_07.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_08.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_08.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_09.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_09.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_10.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_10.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+                <div class="pv-thumb" onclick="openLocalVideo('images/reel_11.mp4')">
+                    <video class="pv-poster-vid" src="images/reel_11.mp4" muted playsinline preload="auto"></video>
+                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+                </div>
+            </div>
+
+            <!-- Press Articles -->
+            <div class="partner-press-label" style="margin-top:2rem;">Press &amp; Features</div>
+            <div class="partner-press-grid">
+                <a href="https://timesofindia.indiatimes.com/entertainment/the-inspiring-journey-of-us-power-couple-isr-and-chandani-in-the-music-industry/amp_articleshow/113553364.cms" target="_blank" rel="noopener" class="partner-press-card">
+                    <span class="partner-press-source">Times of India</span>
+                    <span class="partner-press-headline">The Inspiring Journey of US Power Couple ISR &amp; Chandani in the Music Industry</span>
+                    <span class="partner-press-arrow">Read Article →</span>
+                </a>
+                <a href="https://abc13.com/amp/post/visions-bridging-cultures-through-music-/2066900/" target="_blank" rel="noopener" class="partner-press-card">
+                    <span class="partner-press-source">ABC 13 Houston</span>
+                    <span class="partner-press-headline">Visions: Bridging Cultures Through Music</span>
+                    <span class="partner-press-arrow">Read Article →</span>
+                </a>
+                <a href="https://www.hollywoodhillsmag.com/post/the-real-secret-behind-achieving-reel-beauty" target="_blank" rel="noopener" class="partner-press-card">
+                    <span class="partner-press-source">Hollywood Hills Magazine</span>
+                    <span class="partner-press-headline">The Real Secret Behind Achieving Reel Beauty</span>
+                    <span class="partner-press-arrow">Read Article →</span>
+                </a>
+                <a href="https://instagram.com/reelbeautiful.official" target="_blank" rel="noopener" class="partner-press-card">
+                    <span class="partner-press-source">Reel Beautiful — Instagram</span>
+                    <span class="partner-press-headline">Inside Access &amp; Exclusive Entertainment Coverage</span>
+                    <span class="partner-press-arrow">Follow @reelbeautiful.official →</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Partnership Opportunities Section -->
     <section class="partnership" id="partnership">
         <div class="partnership-container">
@@ -2714,65 +2912,14 @@
             <div class="partner-payment">
                 <p class="partner-payment-label">Payment Methods</p>
                 <div class="partner-payment-row">
-                    <a href="https://www.paypal.com/paypalme" target="_blank" rel="noopener" class="partner-pay-item">
-                        <!-- PayPal official logo SVG -->
+                    <a href="https://www.paypal.com/paypalme/reelbeautiful" target="_blank" rel="noopener" class="partner-pay-item" aria-label="Pay via PayPal — rani485@hotmail.com">
                         <svg class="partner-pay-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z" fill="#009cde"/><path d="M6.635 6.985c.056-.345.283-.612.576-.737a1.1 1.1 0 0 1 .411-.076h5.958c.706 0 1.365.046 1.964.143a8.1 8.1 0 0 1 .808.18 5.926 5.926 0 0 1 1.12.476c.407-2.595-.003-4.359-1.405-5.96C14.492.45 12.328 0 9.596 0H2.138C1.616 0 1.17.382 1.087.9L.003 7.99a.644.644 0 0 0 .636.74h4.629l1.367-1.745z" fill="#003087"/></svg>
-                        <span><strong>PayPal</strong><br><small>rani485@hotmail.com</small></span>
+                        <span class="partner-pay-name">PayPal</span>
                     </a>
-                    <a href="https://enroll.zellepay.com" target="_blank" rel="noopener" class="partner-pay-item">
-                        <!-- Zelle official wordmark SVG -->
+                    <a href="https://enroll.zellepay.com" target="_blank" rel="noopener" class="partner-pay-item" aria-label="Pay via Zelle — +1 (832) 692-1714">
                         <svg class="partner-pay-logo" viewBox="0 0 60 24" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="24" rx="4" fill="#6D1ED4"/><text x="30" y="17" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="13" fill="#ffffff" letter-spacing="1">zelle</text></svg>
-                        <span><strong>Zelle</strong><br><small>+1 (832) 692-1714</small></span>
+                        <span class="partner-pay-name">Zelle</span>
                     </a>
-                </div>
-            </div>
-
-            <!-- Video Reel Grid — images/ folder on GitHub -->
-            <div class="partner-videos-label">Our Reel</div>
-            <div class="partnership-videos">
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_04.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_04.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_05.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_05.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_06.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_06.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_07.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_07.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_08.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_08.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_09.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_09.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_10.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_10.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_11.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_11.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_01.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_01.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_02.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_02.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="pv-thumb" onclick="openLocalVideo('images/reel_03.mp4')">
-                    <video class="pv-poster-vid" src="images/reel_03.mp4" muted playsinline preload="metadata"></video>
-                    <div class="pv-play"><div class="pv-play-circle"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
                 </div>
             </div>
 
@@ -2871,15 +3018,7 @@
             </p>
             
             <div class="contact-info">
-                <!-- Email — plain text hardcoded, never obfuscated -->
-                <a href="mailto:reelbeautiful.official@gmail.com?subject=Inquiry%20%E2%80%94%20Reel%20Beautiful&body=Hi%20ISR%20%26%20Chandani%2C%0A%0AI%20am%20reaching%20out%20regarding%20Reel%20Beautiful.%0A%0AName%3A%20%0AInterest%3A%20%0AMessage%3A%20%0A%0ALooking%20forward%20to%20connecting." class="contact-link">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="4" width="20" height="16" rx="2"/>
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                    </svg>
-                    reelbeautiful.official&#64;gmail.com
-                </a>
-                <!-- Instagram -->
+                <!-- Instagram only — contact details kept private per legal guidance -->
                 <a href="https://instagram.com/reelbeautiful.official" target="_blank" class="contact-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -3547,6 +3686,55 @@
             player.style.display = 'none';
             document.body.style.overflow = '';
         }
+
+        // ── Video thumbnails: seek to 3s on ALL devices ─────────────
+        // Strategy: preload="auto" + explicit load() + seeked event freeze
+        // iOS Safari needs load() called explicitly before seeking works.
+        (function () {
+            var TARGET = 3; // seek to 3 seconds
+
+            function doSeek(vid) {
+                var t = (vid.duration && isFinite(vid.duration) && vid.duration > TARGET)
+                    ? TARGET
+                    : (vid.duration > 0.5 ? vid.duration * 0.5 : 0.1);
+                vid.currentTime = t;
+            }
+
+            document.querySelectorAll('.pv-poster-vid').forEach(function (vid) {
+                // Ensure not invisible from scroll reveal
+                vid.style.opacity = '1';
+                vid.style.transform = 'none';
+
+                // Force preload
+                vid.preload = 'auto';
+                vid.muted = true;
+
+                function trySeek() {
+                    if (vid.readyState >= 1) {
+                        doSeek(vid);
+                    } else {
+                        vid.load();
+                        vid.addEventListener('loadedmetadata', function handler() {
+                            doSeek(vid);
+                            vid.removeEventListener('loadedmetadata', handler);
+                        });
+                        // iOS fallback — force seek after 1s regardless
+                        setTimeout(function () {
+                            if (!(vid.currentTime >= 1)) {
+                                vid.currentTime = TARGET;
+                            }
+                        }, 1000);
+                    }
+                }
+
+                // Pause on frame so it stays frozen
+                vid.addEventListener('seeked', function () {
+                    vid.pause();
+                }, { once: true });
+
+                trySeek();
+            });
+        }());
     </script>
 </body>
 </html>
